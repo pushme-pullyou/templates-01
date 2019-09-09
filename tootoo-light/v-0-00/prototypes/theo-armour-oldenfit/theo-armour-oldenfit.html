@@ -3,7 +3,7 @@
 <head>
 <meta charset = "utf-8" >
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
-<meta name = "description" content = "Basic TooToo HTML template with sliding menu" >
+<meta name = "description" content = "It's about getting better with age" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
 <meta name = "date" content = "2019-09-08" >
 <meta name = "version" content = "0.0.0" >
@@ -59,19 +59,10 @@
 
 		<div id="divTitle" ></div>
 
-		<p>
-			<button id=but onclick=setIt(); accessKey= 'z' title='access key: z '>buttonbutton</button>
-		</p>
+		<div id="FGAdivMenuRepoFilesFolders" ></div>
 
-		<details open>
+		<div id="GATdivGithubAccessToken" ></div>
 
-			<summary class="sumMenuTitle" >GitHub folders & files</summary>
-
-			<div id="FGAdivMenuRepoFilesFolders" ></div>
-
-			<div id="GATdivGithubAccessToken" ></div>
-
-		</details>
 
 	</nav>
 
@@ -84,8 +75,7 @@
 
 <script>
 
-const urlSourceCode = "https://github.com/pushme-pullyou/templates-01";
-const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-32.png";
+const urlSourceCode = "https://github.com/theo-armour/oldenfit";
 
 init();
 
@@ -93,26 +83,22 @@ function init() {
 
 	divTitle.innerHTML = getTitle();
 
+	FGA.branch = '/master/';
+	FGA.user = 'theo-armour';
+	FGA.repo = 'oldenfit';
+	FGA.pathRepo = '';
+
 	FGAdivMenuRepoFilesFolders.innerHTML = FGA.getMenuFilesGithubApi();
 
 	FGA.getFiles(); // move to js?
 
-	FOH.urlDefaultFile = "../../README.md";
+	FOH.urlDefaultFile = "README.md";
 
 	FOH.target = divContents;
 
 	FOH.onHashChange();
 
 	window.addEventListener ( 'hashchange', FOH.onHashChange, false );
-
-
-}
-
-
-
-function setIt() {
-
-	divContents.innerHTML += `<p>${ ( performance.now() ) } - Howdy! </p>`;
 
 }
 
@@ -127,6 +113,10 @@ function toggleNavPanel() {// move to COR??
 
 
 function getTitle() {
+
+
+	const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-32.png";
+
 
 	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 	const version = document.head.querySelector( "[ name=version ]" ).content;

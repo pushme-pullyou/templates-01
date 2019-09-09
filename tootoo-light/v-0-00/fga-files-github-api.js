@@ -140,11 +140,11 @@ FGA.callbackGitHubPathFileNames = function( xhr ) {
 	`
 		<p>Click any <a href=${ FGA.urlSourceCode } >${ FGA.iconInfo }</a> icon to view source code on GitHub.
 
-		<p>Click any &#x2750; icon to go full screen & obtain a link to the individual file.</p>
 
 		<p>Tooltips provide file size.</p>
-	`;
+		`;
 
+		//<p>Click any &#x2750; icon to go full screen & obtain a link to the individual file.</p>
 
 	FGAdivMenuItems.innerHTML = htmFolders + htmFiles + htmHelp;
 
