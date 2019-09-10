@@ -64,6 +64,11 @@
 		<div id="GATdivGithubAccessToken" ></div>
 
 
+		<hr>
+
+	<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
+
+
 	</nav>
 
 	<main id=main >
@@ -75,7 +80,7 @@
 
 <script>
 
-const urlSourceCode = "https://github.com/theo-armour/oldenfit";
+const urlSourceCode = "https://github.com/pushme-pullyou/templates-01";
 
 init();
 
@@ -88,6 +93,7 @@ function init() {
 	FGA.repo = 'oldenfit';
 	FGA.pathRepo = '';
 
+	FGA.urlGitHubPage = "https://www.ladybug.tools/spider-gbxml-viewers-for-openstudio/";
 	FGA.urlGitHubPage = "";
 
 	FGAdivMenuRepoFilesFolders.innerHTML = FGA.getMenuFilesGithubApi();
@@ -116,9 +122,7 @@ function toggleNavPanel() {// move to COR??
 
 function getTitle() {
 
-
 	const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-32.png";
-
 
 	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 	const version = document.head.querySelector( "[ name=version ]" ).content;

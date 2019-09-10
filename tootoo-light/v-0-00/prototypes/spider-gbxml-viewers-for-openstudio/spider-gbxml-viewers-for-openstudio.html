@@ -59,19 +59,15 @@
 
 		<div id="divTitle" ></div>
 
-		<p>
-			<button id=but onclick=setIt(); accessKey= 'z' title='access key: z '>buttonbutton</button>
-		</p>
+		<div id="FGAdivMenuRepoFilesFolders" ></div>
 
-		<details open>
+		<div id="GATdivGithubAccessToken" ></div>
 
-			<summary class="sumMenuTitle" >GitHub folders & files</summary>
 
-			<div id="FGAdivMenuRepoFilesFolders" ></div>
+		<hr>
 
-			<div id="GATdivGithubAccessToken" ></div>
+	<center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
 
-		</details>
 
 	</nav>
 
@@ -85,7 +81,6 @@
 <script>
 
 const urlSourceCode = "https://github.com/ladybug-tools/spider-gbxml-viewers-for-openstudio";
-const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-32.png";
 
 init();
 
@@ -115,16 +110,6 @@ function init() {
 
 	window.addEventListener ( 'hashchange', FOH.onHashChange, false );
 
-
-
-}
-
-
-
-function setIt() {
-
-	divContents.innerHTML += `<p>${ ( performance.now() ) } - Howdy! </p>`;
-
 }
 
 
@@ -138,6 +123,8 @@ function toggleNavPanel() {// move to COR??
 
 
 function getTitle() {
+
+	const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-32.png";
 
 	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 	const version = document.head.querySelector( "[ name=version ]" ).content;
