@@ -138,7 +138,7 @@ FGA.callbackGitHubPathFileNames = function( xhr ) {
 
 	const htmHelp =
 	`
-		<p>Click any <a href=${ FGA.urlSourceCode } >${ FGA.iconInfo }</a> icon to view source code on GitHub.
+		<p>Click any <a href=https://github.com >${ FGA.iconInfo }</a> icon to view source code on GitHub.
 
 
 		<p>Tooltips provide file size.</p>
