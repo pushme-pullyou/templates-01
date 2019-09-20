@@ -29,14 +29,31 @@
 		padding: 0 3rem; position: absolute; width: calc( 100% - var( --mnu-width ) );  }
 
 	#navMenu { background-color: #eee; height: 100%; left: 0; margin: 0; overflow: auto;
-		padding: 0 1rem; position: fixed; transition: left 0.5s; top: 0; width: var( --mnu-width ); }
+		padding: 0 1rem; position: fixed; transition: left 0.5s; top: 0; width: var( --mnu-width ); z-index:10; }
 
-	#expandButton { height: 32px; position: absolute; left: var( --mnu-width ); top: 0px;
+	#expandButton { height: 32px; position: absolute; left: var( --mnu-width );
 		transition: left 0.5s; width: 32px; z-index: 1; }
 
 	#expandButton.collapsed { left: 0; }
 	#navMenu.collapsed { left: calc( var( --mnu-width ) * -1 ); padding: 0; }
 	#main.collapsed { left: 0; width: 100%; }
+
+
+@media all and ( max-width: 640px ) {
+
+	#main { left: 0; padding: 0; width: 100%; }
+	#expandButton { bottom: 1rem; }
+
+}
+
+
+@media all and ( max-height: 640px ) {
+
+	#main { left: 0; padding: 0rem; width: 100%; }
+
+	#expandButton { bottom: 1rem; }
+
+}
 
 </style>
 </head>
@@ -71,6 +88,8 @@ init();
 function init() {
 
 	divTitle.innerHTML = getTitle();
+
+	if ( window.innerWidth < 640 || window.innerHeight < 640 ) { toggleNavPanel(); }
 
 	divContents.innerHTML += `${ ( new Date ) }<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
 
