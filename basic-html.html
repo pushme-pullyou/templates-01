@@ -5,18 +5,18 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Basic TooToo HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
-<meta name = "date" content = "2019-05-25" >
-<meta name = "version" content = "0.0.0" >
+<meta name = "date" content = "2019-09-21" >
+<meta name = "version" content = "0.00.0" >
 <title></title>
 <style>
 
 	* { box-sizing: border-box; }
 
-	:root { --mnu-width: 22rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
+	:root { font: 12pt monospace; --mnu-width: 22rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
 
 	html { height: 100%; }
 
-	body { font: 12pt monospace; margin: 0 auto; max-width: 800px; padding: 0 0.5rem; }
+	body { margin: 0 auto; max-width: 800px; padding: 0 0.5rem; }
 
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
@@ -82,6 +82,7 @@ function getTitle() {
 
 	document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 	const version = document.head.querySelector( "[ name=version ]" ).content;
+	const description = document.head.querySelector( "[ name=description ]" ).content;
 
 	const htm =
 	`
@@ -92,9 +93,7 @@ function getTitle() {
 			<a href="" title="Click to reload this page" >${ document.title } ${ version }</a>
 		</h2>
 
-		<p>
-			${ document.head.querySelector( "[ name=description ]" ).content }
-		</p>
+		<p>${ description }</p>
 	`;
 
 	return htm;
