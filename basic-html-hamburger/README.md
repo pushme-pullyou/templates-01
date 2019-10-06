@@ -1,11 +1,16 @@
-
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/templates-01/tootoo-light/v-0-00/prototypes/prototype/#README.md "View file as a web page." ) </span>
-
-# Prototype Read Me
+# Basic HTML Hamburger Read Me
 
 
 <details open >
 <summary>Concept</summary>
+
+Rules
+
+* 100% self-contained
+* Calls no modules
+
+
+See TooToo light for versions with more features
 
 
 </details>
@@ -17,18 +22,18 @@
 
 </details>
 
+
 <details>
 <summary>Issues</summary>
 
 
-
-
 </details>
+
 
 <details>
 <summary>Change Log</summary>
 
-### XXX
+### 2019-09-30 ~ Theo
 
 * First commit
 

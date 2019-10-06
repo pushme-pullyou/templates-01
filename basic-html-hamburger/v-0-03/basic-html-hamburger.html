@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Basic TooToo HTML template with sliding menu">
+	<meta name="keywords" content="JavaScript,GitHub,FOSS">
+	<meta name="date" content="2019-09-30">
+	<meta name="version" content="0.00.0">
+	<title></title>
+	<style>
+
+		* {
+			box-sizing: border-box;
+		}
+
+		:root {
+			font: 100% monospace;
+			--mnu-width: 22rem;
+			--screen-width: calc(100vw);
+			--headerHeight: 6rem;
+		}
+
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+		}
+
+		a {
+			color: crimson;
+			text-decoration: none;
+		}
+
+		a:hover,
+		a:focus,
+		a:active {
+			background-color: yellow;
+			color: #aaa;
+			text-decoration: underline
+		}
+
+		button,
+		input[type=button] {
+			background-color: #ddd;
+			border: none;
+			color: #322;
+			cursor: pointer;
+			padding: 3px 5px;
+		}
+
+		button:hover {
+			background: #ccc;
+			color: #fff
+		}
+
+		button:active {
+			background: blue;
+			color: #fff
+		}
+
+		summary {
+			font-weight: bold;
+		}
+
+
+		.secContents {
+			margin: 0 auto;
+			max-width: 40rem;
+		}
+
+
+		#divContents {
+			border: 0px solid red;
+			height: 100%;
+			left: var(--mnu-width);
+			padding: 0 1rem;
+			position: absolute;
+			width: calc(100% - var(--mnu-width));
+		}
+
+
+		#expandButton {
+			height: 32px;
+			position: absolute;
+			left: var(--mnu-width);
+			transition: left 0.5s;
+			width: 32px;
+			z-index: 1;
+		}
+
+
+		#navMenu {
+			background-color: #eee;
+			height: 100%;
+			left: 0;
+			overflow: auto;
+			padding: 0 1rem;
+			position: fixed;
+			transition: left 0.5s;
+			top: 0;
+			width: var(--mnu-width);
+			z-index: 10;
+		}
+
+
+		#divContents.collapsed {
+			left: 0;
+			width: 100%;
+		}
+
+		#expandButton.collapsed {
+			left: 0;
+		}
+
+		#navMenu.collapsed {
+			left: calc(var(--mnu-width) * -1);
+			padding: 0;
+		}
+
+
+
+		@media all and (max-width: 640px) {
+
+			#divContents {
+				left: 0;
+				padding: 0 1rem;
+				width: 100%;
+			}
+
+			#expandButton {
+				bottom: 1rem;
+			}
+
+		}
+
+		@media all and (max-height: 640px) {
+
+			#divContents {
+				left: 0;
+				padding: 0 1rem;
+				width: 100%;
+			}
+
+			#expandButton {
+				bottom: 1rem;
+			}
+
+		}
+
+	</style>
+</head>
+
+<body>
+
+
+	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
+
+	<nav id="navMenu">
+
+		<div id="divTitle"></div>
+
+		<div id=divMenu>
+
+			<p>
+				<button onclick=setIt();>set it</button>
+			</p>
+
+		</div>
+
+		<hr>
+
+		<h1 onclick="navMenu.scrollTop=0;" style="color:#888; cursor:pointer; text-align:center;"
+			title="go to top of menu">
+			❦
+		</h1>
+
+	</nav>
+
+	<div id="divContents">
+
+		<section class="secContents">
+
+			<div id="divHeader"></div>
+
+			<main id="mainContents"></main>
+
+			<div id="divFooter">
+
+				<h1 onclick="divContents.scrollTop=0;" style="color:#888; cursor:pointer; text-align:center;"
+					title="go to top of menu">
+					❦
+				</h1>
+
+			</div>
+
+		</section>
+
+	</div>
+
+
+	<script>
+
+
+		const urlSourceCode = "https://github.com/zzzzz/xxxxx.html";
+		const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
+
+
+		init();
+
+
+		function init() {
+
+			divHeader.innerHTML = divTitle.innerHTML = getTitle();
+
+			divMenu.innerHTML += mainContents.innerHTML += `${( new Date )}<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
+
+			if ( window.innerWidth < 640 || window.innerHeight < 640 ) {
+				toggleNavMenu();
+			}
+
+		}
+
+
+
+		function setIt() {
+
+			mainContents.innerHTML += `<p>${( performance.now() )} - Howdy! </p>`;
+
+		}
+
+
+
+		function getTitle() {
+
+			document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+			const version = document.head.querySelector( "[ name=version ]" ).content;
+			const description = document.head.querySelector( "[ name=description ]" ).content;
+
+			const htm =
+				`
+				<h2>
+					<a href=${ urlSourceCode} target=_top title="Source code on GitLab" >
+						<img src=${ urlSourceCodeIcon} height=18 style=opacity:0.5; >
+					</a>
+
+					<a href="" title="Click to reload this page" >${ document.title} ${version}</a>
+				</h2>
+
+				<p>${ description}</p>
+			`;
+
+			return htm;
+
+		}
+
+
+		function toggleNavMenu() {
+
+			expandButton.classList.toggle( 'collapsed' );
+			navMenu.classList.toggle( 'collapsed' );
+			divContents.classList.toggle( 'collapsed' );
+
+		}
+
+
+	</script>
+</body>
+
+</html>
