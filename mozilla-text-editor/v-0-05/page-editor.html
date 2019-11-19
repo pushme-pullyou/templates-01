@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Basic TooToo HTML template with sliding menu">
+	<meta name="keywords" content="JavaScript,GitHub,FOSS">
+	<meta name="date" content="2019-11-18">
+	<meta name="version" content="0.05.0">
+	<title>page editor</title>
+
+	<link href="src/style.css" rel="stylesheet" >
+</head>
+
+<body>
+
+
+	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
+
+	<nav id="navMenu">
+
+		<header id="hdrTitle" ></header>
+
+		<p>
+			<button onclick=goToday(); >go to today</button>
+		</p>
+
+		<details open>
+
+			<summary class="sumMenuTitle" >GitHub folders & files</summary>
+
+			<div id="FGAdivMenuRepoFilesFolders" ></div>
+
+			<div id="FGAdivGithubAccessToken" ></div>
+
+			<p>
+				<input id=FGAinpGitHubApiKey onclick=this.select(); onblur=FGA.setGitHubAccessToken(); title="Obtain API Access Token" style=width:100%; >
+			</p>
+
+			<div id=divResponsePost > </div>
+
+		</details>
+
+		<div id=divMenu></div>
+
+		<footer>
+
+			<hr>
+
+			<center title="hello! click me to go up to the top"><a href=javascript:navMenu.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
+
+		</footer>
+
+	</nav>
+
+	<div id="divContents">
+
+		<section class="secContents">
+
+			<div id="divHeader"></div>
+
+			<div id=divMenuEdit></div>
+
+			<div id="menuOpenFile"></div>
+
+			<main id="mainContents"></main>
+
+			<div id="divFooter">
+
+				<h1 onclick="divContents.scrollTop=0;" style="color:#888; cursor:pointer; text-align:center;"
+					title="go to top of menu">
+					❦
+				</h1>
+
+			</div>
+
+		</section>
+
+	</div>
+
+<script src="src/fga-files-github-api.js"></script>
+<script src="src/page-editor-html.js" ></script>
+<script src="src/page-editor.js" ></script>
+
+<script>
+
+const COR = {};
+
+COR.branch = "master";
+COR.user = "theo-armour";
+COR.repo = "theo-armour.github.io";
+COR.pathRepo = "data/days-of-year-md/";
+
+//COR.uriDefaultFile = "README.md";
+
+
+COR.ignoreFolders = [];
+
+COR.ignoreFiles = [ ];
+
+
+	const urlSourceCode = "https://github.com/zzzzz/xxxxx.html";
+	const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
+
+
+	init();
+
+
+	function init() {
+
+		hdrTitle.innerHTML = getTitle();
+
+		FGA.accessToken = localStorage.getItem( 'githubAccessToken' ) || '';
+
+		FGAinpGitHubApiKey.value = FGA.accessToken;
+
+		FGAdivMenuRepoFilesFolders.innerHTML = FGA.getMenuFilesGithubApi();
+
+		FGA.onHashChange();
+
+		if ( window.innerWidth < 640 || window.innerHeight < 640 ) {
+			toggleNavMenu();
+		}
+
+	}
+
+
+	function goToday() {
+
+		const d = new Date().toISOString()
+
+		location.hash = d.slice( 5, 7 ) + "/" + d.slice( 5, 10 ) + ".md";
+
+	}
+
+
+	function getTitle() {
+
+		//document.title = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, -5 ).replace( /-/g, ' ' );
+		const version = document.head.querySelector( "[ name=version ]" ).content;
+		const description = document.head.querySelector( "[ name=description ]" ).content;
+
+		const htm =
+			`
+			<h2>
+				<a href=${ urlSourceCode} target=_top title="Source code on GitLab" >
+					<img src=${ urlSourceCodeIcon} height=18 style=opacity:0.5; >
+				</a>
+
+				<a href="" title="Click to reload this page" >${ document.title} ${version}</a>
+			</h2>
+
+			<p>${ description}</p>
+		`;
+
+		return htm;
+
+	}
+
+
+	function toggleNavMenu() {
+
+		expandButton.classList.toggle( 'collapsed' );
+		navMenu.classList.toggle( 'collapsed' );
+		divContents.classList.toggle( 'collapsed' );
+
+	}
+
+
+</script>
+</body>
+
+</html>
