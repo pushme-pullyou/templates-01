@@ -3,7 +3,10 @@
 
 # Mozilla Text Editor Read Me
 
-<iframe src="v-0-00/mozilla-text-editor-theo.html" style=height:550px;width:100%;></iframe>
+<iframe src="index.html" style=height:550px;width:100%;></iframe>
+
+## [page-editor]( https://pushme-pullyou.github.io/templates-01/mozilla-text-editor )
+
 
 ## Concept
 
@@ -13,15 +16,15 @@
 
 * Toggles between HTML and formatted views
 	* Both views editable
-* Saves URLs dragged and dropped as hres
+* Saves URLs dragged and dropped as hrefs
 * Saves images pasted in
 
 ## Wish list
 
-* 2019-10-27 ~ Theo ~ Open file via location.hash
+* 2019-11-23 ~ Theo ~ Save to localStorage
 * 2019-10-27 ~ Theo ~ TooTooHtml??
-* 2019-10-27 ~ Theo ~ if file id Markdown then open in text area
-* 2019-10-27 ~ Theo ~ Add auto-save
+* 2019-10-27 ~ Theo ~ if file is Markdown then open in text area
+
 * 2019-10-27 ~ Format/pretty print HTML output
 * 2019-10-27 ! Theo ~ Add check if _updateOn content on server is newer than on screen content
 * Check are there other Midas commands?
@@ -31,7 +34,7 @@
 
 * Add open and auto-save diary files
 * Open Google Docs files and extract the data
-
+* 2019-10-27 ~ Theo ~ Add auto-save
 
 ## Links
 
@@ -40,6 +43,13 @@
 * https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Midas
 
 ## Change Log
+
+
+### 2019-11-23 ~ Theo
+
+Done
+
+* 2019-10-27 ~ Theo ~ Open file via location.hash
 
 ### 2019-10-27 ~ Theo
 

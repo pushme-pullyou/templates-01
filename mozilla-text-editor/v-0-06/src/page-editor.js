@@ -59,6 +59,8 @@ function getHtmlFile(url) {
 
 			textBox.innerHTML = decodedData;
 
+			htmPrevious = textBox.innerHTML;
+			
 			logFileSha = data.sha;
 
 		}).catch((err) => {
