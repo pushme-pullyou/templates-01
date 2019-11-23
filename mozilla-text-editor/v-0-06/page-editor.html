@@ -7,7 +7,7 @@
 	<meta name="description" content="Basic TooToo HTML diary with sliding menu">
 	<meta name="keywords" content="JavaScript,GitHub,FOSS">
 	<meta name="date" content="2019-11-18">
-	<meta name="version" content="0.05.0">
+	<meta name="version" content="0.06.0">
 	<title>page editor</title>
 
 	<link href="src/style.css" rel="stylesheet" >
@@ -38,7 +38,7 @@
 				<input id=FGAinpGitHubApiKey onclick=this.select(); onblur=FGA.setGitHubAccessToken(); title="Obtain API Access Token" style=width:100%; >
 			</p>
 
-			<div id=divResponsePost > </div>
+
 
 		</details>
 
@@ -65,6 +65,8 @@
 			<div id="menuOpenFile"></div>
 
 			<main id="mainContents"></main>
+
+			<div id=divResponsePost > </div>
 
 			<div id="divFooter">
 
@@ -100,9 +102,11 @@ COR.ignoreFolders = [];
 COR.ignoreFiles = [ ];
 
 
-	const urlSourceCode = "https://github.com/zzzzz/xxxxx.html";
+	const urlSourceCode = "https://github.com/pushme-pullyou/templates-01/mozilla-text-editor/";
 	const urlSourceCodeIcon = "https://pushme-pullyou.github.io/github-mark-64.png";
 
+
+	//window.onbeforeunload = () => { return "any string" };
 
 	init();
 
@@ -117,6 +121,10 @@ COR.ignoreFiles = [ ];
 
 		FGAdivMenuRepoFilesFolders.innerHTML = FGA.getMenuFilesGithubApi();
 
+		divMenuEdit.innerHTML = htmPage;
+
+		initDoc();
+
 		FGA.onHashChange();
 
 		if ( window.innerWidth < 640 || window.innerHeight < 640 ) {
@@ -128,9 +136,11 @@ COR.ignoreFiles = [ ];
 
 	function goToday() {
 
-		const d = new Date().toISOString()
+		const d = new Date();
+		const mo  = ( "0" + ( d.getMonth() + 1 ) ).slice( -2 );
+		const da =  ( "0" + d.getDate() ).slice( -2 )
 
-		location.hash = d.slice( 5, 7 ) + "/" + d.slice( 5, 10 ) + ".md";
+		location.hash = mo + "/" + mo + "-" + da + ".md";
 
 	}
 

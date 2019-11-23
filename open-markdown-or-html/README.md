@@ -6,7 +6,7 @@ value="You are now in a GitHub web page view - Click this button to view this re
 
 <br>
 
-# [open-markdown-or-html Read Me]( #tootoo13/0-templates/open-markdown-or-html/README.md )
+# [open-markdown-or-html Read Me]( #README.md )
 
 <!--
 <iframe src=https://pushme-pullyou.github.io/tootoo13/0-templates/open-markdown-or-html/open-markdown-or-html-r1.html width=100% height=500px >Iframes are not viewable in GitHub source code views</iframe>
@@ -17,6 +17,10 @@ _<small>open-markdown-or-html</small>_
 
 
 ## Concept
+
+File wrangler.
+
+Default index.html file. Opens HTML or Markdown files. Passes location.hash.
 
 Use showdown.js to convert markdown to HTML
 
@@ -39,6 +43,14 @@ Use showdown.js to convert markdown to HTML
 
 
 ## Change Log
+
+### 2019-11-21 ~
+
+omoh v 0.01.01
+
+* R: Double quotes everywhere
+* C: Add version meta tag
+* C: Update readme
 
 ### 2019-01-06 ~ Theo
 
