@@ -62,10 +62,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 center {
-	font-size: 2ch;
+	font-size: 3ch;
+	font-weight: bold;
 }
 
 summary {
+	font-size: 2ch;
 	font-weight: bold;
 }
 

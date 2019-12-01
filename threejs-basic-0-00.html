@@ -52,6 +52,7 @@
 
 <script>
 
+let mesh, meshGroup
 
 const urlSourceCode = "https://github.com/zzzzz/zzzzz.github.io/tree/master/xxxxx/";
 
@@ -95,12 +96,16 @@ function init() {
 
 
 
-function addMeshes() {
+function addMeshes( count = 100 ) {
 
-	meshes = Array.from( { length: 100 }, addMesh  )
-		.forEach( mesh => mesh.position.set( Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50 ) )
-		//.forEach( mesh => mesh.scale.multiplyScalar( Math.random() ))
-	console.log( meshes);
+	scene.remove.meshGroup;
+	meshGroup = new THREE.Group();
+
+	for (let i = 0; i < count; i++ ) { meshGroup.add( addMesh() ) };
+
+	meshGroup.children.forEach( mesh => mesh.position.set( Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50 ) )
+
+	scene.add( meshGroup )
 
 }
 
@@ -110,7 +115,7 @@ function addMesh( size = 20 ) {
 	const geometry = new THREE.BoxGeometry( size, size, size );
 	const material = new THREE.MeshNormalMaterial();
 	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
+	//scene.add( mesh );
 
 	return mesh;
 
