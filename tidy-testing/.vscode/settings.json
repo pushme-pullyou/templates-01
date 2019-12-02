@@ -1,0 +1,17 @@
+{
+	"editor.fontSize": 14,
+	"editor.minimap.showSlider": "always",
+	"files.trimTrailingWhitespace": true,
+	"scm.alwaysShowProviders": true,
+	"editor.formatOnType": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+	"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+	"javascript.format.semicolons": "insert",
+	"typescript.format.insertSpaceAfterConstructor": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+	"typescript.format.insertSpaceBeforeFunctionParenthesis": true
+}

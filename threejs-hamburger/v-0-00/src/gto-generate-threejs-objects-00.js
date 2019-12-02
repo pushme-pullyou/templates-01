@@ -28,8 +28,6 @@ GTO.getMenu = function () {
 
 	<summary>Generate Three.js objects</summary>
 
-	<p>Create new geometries by algorithm</p>
-
 	<p>
 		<select onchange=GTO.drawGeometry(this.selectedIndex) size=8 >${ gto }</select>
 	</p>
@@ -48,13 +46,11 @@ GTO.drawGeometry = function ( index ) {
 
 	scene.remove( mesh );
 
-	const items = GTO.geometries[index];
-	const name = items.shift();
-	const geometry = new THREE[ name + "Geometry" ]( ...items );
+	const items = GTO.geometries[ index ];
+	const geometry = new THREE[ items.shift() + "Geometry" ]( ...items );
 	const material = new THREE.MeshNormalMaterial( { opacity: 0.85, side:2, transparent: true });
 
 	mesh = new THREE.Mesh(geometry, material);
-	mesh.name = name.toLowerCase();
 
 	scene.add(mesh);
 
