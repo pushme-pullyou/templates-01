@@ -25,7 +25,6 @@
 * 2019-11-23 ~ Theo ~ Save to localStorage
 * 2019-10-27 ~ Theo ~ TooTooHtml??
 * 2019-10-27 ~ Theo ~ if file is Markdown then open in text area
-
 * 2019-10-27 ~ Format/pretty print HTML output
 * 2019-10-27 ! Theo ~ Add check if _updateOn content on server is newer than on screen content
 * Check are there other Midas commands?
