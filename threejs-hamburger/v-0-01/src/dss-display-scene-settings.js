@@ -9,6 +9,8 @@ DSS.wireframe = undefined;
 
 DSS.getMenu = function () {
 
+	window.addEventListener("onresetall", DSS.reset );
+
 	const htm =
 		`
 <details open>
@@ -119,5 +121,7 @@ DSS.reset = function () {
 	DSSchkEdges.checked = false;
 	edges = null;
 	boxHelper = null;
+
+	console.log('DSS.reset');
 
 };

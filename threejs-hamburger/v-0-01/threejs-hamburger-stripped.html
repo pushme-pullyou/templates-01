@@ -20,18 +20,6 @@
 	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/build/three.min.js" ></script>
 	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/controls/TrackballControls.js" ></script>
 
-	<script src="src/gto-generate-threejs-objects-01.js" ></script>
-	<script src="src/cfr-csv-file-reader.js"></script>
-	<script src="src/ofr-obj-file-reader.js"></script>
-	<script src="src/ovg-obj-viewer-gallery.js"></script>
-	<script src="src/ovn-obj-viewer-nasa.js"></script>
-	<script src="src/cvd-csv-viewer-dashdotdot.js"></script>
-
-	<script src="src/or-object-rotation.js"></script>
-
-
-	<script src="src/mms-mesh-material-settings-00.js" ></script>
-	<script src="src/dss-display-scene-settings.js" ></script>
 
 	<button id="expandButton" onclick="toggleNavMenu();" >☰</button>
 
@@ -43,37 +31,8 @@
 			<button onclick=controls.reset(); title="Return to default view">reset view</button>
 
 			<button onclick=zoomObjectBoundingSphere(); title="zoom without shifting camera angle" >zoom all</button>
-
 		</p>
-		<p><button onclick=MOD.setEventToFire(); >set event</button></p>
 
-		<p><button onclick=MOD.fireAnEvent() >fireAnEvent</button></p>
-
-		<p><button onclick=fireAModuleEventFromHere() >fireAModuleEventFromHere</button></p>
-
-		<p><button onclick=MOD2.fireAnEvent() >fire event mod2</button></p>
-
-		<p id=divContents ></p>
-
-
-		<div id=GTOdivMenuGenerateThreejsObjects ></div>
-
-		<div id=CFRdivMenuCsvFileReader ></div>
-
-		<div id=OFRdivMenuObjFileReader ></div>
-
-		<div id=OVGdivObjectViewerGallery ></div>
-
-		<div id=OVNdivObjectViewerNasa ></div>
-
-		<div id=CVDdivCsvViewerDashDotDot ></div>
-
-		<div id=ORdivObjectRotation ></div>
-
-
-		<div id=MMSdivMeshMaterialSettings > </div>
-
-		<div id=DSSdivMenuDisplaySceneSettings ></div>
 
 		<footer>
 
@@ -95,50 +54,6 @@
 <script>
 
 
-const MOD = {}
-
-MOD.setEventToFire = function() {
-
-	// , {"bubbles": true, "cancelable": false, detail: true }
-
-	MOD.eventToFire = new Event( "bingo" );
-
-	window.addEventListener( "bingo", MOD.onEventFired1 );
-	window.addEventListener("bingo", e => MOD.onEventFired2(e));
-
-	console.log('MOD.eventToFire', MOD.eventToFire);
-
-}
-
-
-MOD.fireAnEvent = function() {
-
-	window.dispatchEvent( MOD.eventToFire );
-	window.dispatchEvent(eventResetIndexPage);
-
-}
-
-MOD.onEventFired1 = function() {
-
-	divContents.innerHTML += `<p>event 1 ${new Date() }</p>`;
-
-}
-
-
-MOD.onEventFired2 = function(e) {
-
-	divContents.innerHTML += `<p>event 2 type: ${ e.type } time: ${ e.timeStamp }</p>`;
-	console.log( 'e', e );
-
-}
-
-fireAModuleEventFromHere = function() {
-
-window.dispatchEvent( MOD.eventToFire );
-
-}
-
-
 const urlSourceCode = `https://github.com/`;
 const urlSourceCodeIcon = "src/github-mark-32.png";
 
@@ -155,24 +70,6 @@ function init() {
 
 	hdrTitle.innerHTML = getTitle();
 
-	GTOdivMenuGenerateThreejsObjects.innerHTML = GTO.getMenu();
-
-	CFRdivMenuCsvFileReader.innerHTML = CFR.getMenu()
-
-	OFRdivMenuObjFileReader.innerHTML = OFR.getMenu();
-
-	OVGdivObjectViewerGallery.innerHTML = OVG.getMenu();
-
-	OVNdivObjectViewerNasa.innerHTML = OVN.getMenu();
-
-	CVDdivCsvViewerDashDotDot.innerHTML = CVD.getMenu();
-
-	ORdivObjectRotation.innerHTML = OR.getMenu();
-
-	MMSdivMeshMaterialSettings.innerHTML = MMS.getMenu();
-
-
-	DSSdivMenuDisplaySceneSettings.innerHTML = DSS.getMenu();
 
 	renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -201,19 +98,9 @@ function init() {
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 
+	
+	eventResetAll = new Event( "onresetall" );
 
-	eventResetAll = new Event( "onresetall");
-
-	window.addEventListener( "onresetall", resetHome );
-
-	window.dispatchEvent(eventResetAll);
-
-}
-
-
-function resetHome() {
-
-	console.log( 'reset home' );
 
 }
 

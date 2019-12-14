@@ -1,3 +1,9 @@
+// copyright 2019 Theo Armour. MIT license.
+// 2019-12-06
+// jshint esversion: 6
+// jshint loopfunc: true
+
+
 
 const GTO = {}
 
@@ -6,11 +12,11 @@ GTO.geometries = [
 	["Box", 20, 20, 50 ],
 	["Cone", 30, 60, 30],
 	["Cylinder", 15, 30, 60, 20 ],
-	["Sphere", 50, 50, 20 ],
-	["Tetrahedron", 50],
 	["Dodecahedron", 50, 0],
 	["Icosahedron", 50, 0],
 	["Octahedron", 50, 0],
+	["Sphere", 50, 50, 20 ],
+	["Tetrahedron", 50],
 	["Torus", 40, 10, 12, 32 ],
 	["TorusKnot", 50, 18, 64, 24 ]
 ];
@@ -31,7 +37,7 @@ GTO.getMenu = function () {
 	<p>Create new geometries by algorithm</p>
 
 	<p>
-		<select onchange=GTO.drawGeometry(this.selectedIndex) size=8 >${ gto }</select>
+		<select onchange=GTO.drawGeometry(this.selectedIndex) size=10 >${ gto }</select>
 	</p>
 
 </details>
@@ -57,6 +63,5 @@ GTO.drawGeometry = function ( index ) {
 	mesh.name = name.toLowerCase();
 
 	scene.add(mesh);
-
 
 }

@@ -1,6 +1,7 @@
 /* global THREE, zoomObjectBoundingSphere, OVNselObj, OVNdivMessage, eventResetAll, scene, mesh, controls*/
 // jshint esversion: 6
 // jshint loopfunc: true
+
 const OVN = {};
 
 OVN.url = "https://api.github.com/repos/nasa/NASA-3D-Resources/git/trees/master?recursive=1";
