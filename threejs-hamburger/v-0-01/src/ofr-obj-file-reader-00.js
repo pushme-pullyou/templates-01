@@ -1,3 +1,9 @@
+// copyright 2019 Theo Armour. MIT license.
+// See pushme-pullyou/templates-01/threejs-hamburger/v-0-01/src/dss-display-scene-settings-01.js
+// 2019-12-18 v0.00.00
+/* global THREE, zoomObjectBoundingSphere, divMessage, eventResetAll, scene, mesh, meshPlane, controls */
+// jshint esversion: 6
+// jshint loopfunc: true
 
 const OFR = {};
 

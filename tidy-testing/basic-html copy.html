@@ -98,10 +98,15 @@ position: absolute; top: 0; width: var( --mnu-width ); }
 		}
 
 		function setIt() {
+
 			divContents.innerHTML += `<p>${ performance.now() } - Howdy! </p>`;
+
 		}
 
+
+
 		function getTitle() {
+
 			document.title = document.title ?
 				document.title :
 				location.href
@@ -115,7 +120,7 @@ position: absolute; top: 0; width: var( --mnu-width ); }
 
 			const htm = `
 <h2>
-<a href=${urlSourceCode } target=_top title="Source code on GitHub" >
+<a href=${ urlSourceCode } target=_top title="Source code on GitHub" >
 <img src=${urlSourceCodeIcon } height=18 style=opacity:0.5; >
 </a>
 <a href="" title="Click to reload this page" >${document.title } ${ version }</a>

@@ -17,20 +17,22 @@
 
 <body>
 
-	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/build/three.min.js" ></script>
-	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/controls/TrackballControls.js" ></script>
+	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r111/build/three.min.js" ></script>
+	<script src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r111/examples/js/controls/TrackballControls.js" ></script>
 
-	<script src="src/gto-generate-threejs-objects-01.js" ></script>
-	<script src="src/cfr-csv-file-reader.js"></script>
-	<script src="src/ofr-obj-file-reader-00.js"></script>
-	<script src="src/ovg-obj-viewer-gallery-00.js"></script>
-	<script src="src/ovn-obj-viewer-nasa.js"></script>
-	<script src="src/cvd-csv-viewer-dashdotdot.js"></script>
+	<script src="browse-files/gto-generate-threejs-objects-02.js" ></script>
+	<script src="browse-files/gtl-generate-threejs-lines-02.js"></script>
 
-	<script src="src/or-object-rotation.js"></script>
+	<script src="browse-files/cfr-csv-file-reader.js"></script>
+	<script src="browse-files/ofr-obj-file-reader-00.js"></script>
 
+	<script src="browse-files/ovg-obj-viewer-gallery-00.js"></script>
+	<script src="browse-files/ovn-obj-viewer-nasa.js"></script>
+	<script src="browse-files/cvd-csv-viewer-dashdotdot.js"></script>
 
-	<script src="src/mms-mesh-material-settings-01.js" ></script>
+	<script src="src/or-object-rotation-01.js"></script>
+
+	<script src="src/mms-mesh-material-settings-02.js" ></script>
 	<script src="src/dss-display-scene-settings-01.js" ></script>
 
 	<button id="expandButton" onclick="toggleNavMenu();" >☰</button>
@@ -45,6 +47,7 @@
 			<button onclick=zoomObjectBoundingSphere(); title="zoom without shifting camera angle" >zoom all</button>
 
 		</p>
+
 		<p><button onclick=MOD.setEventToFire(); >set event</button></p>
 
 		<p><button onclick=MOD.fireAnEvent() >fireAnEvent</button></p>
@@ -56,24 +59,37 @@
 		<p id=divContents ></p>
 
 
-		<div id=GTOdivMenuGenerateThreejsObjects ></div>
+		<details open>
 
-		<div id=CFRdivMenuCsvFileReader ></div>
+			<summary class=sumMenuTitle >Browse files</summary>
 
-		<div id=OFRdivMenuObjFileReader ></div>
+			<div id=GTOdivMenuGenerateThreejsObjects ></div>
 
-		<div id=OVGdivObjectViewerGallery ></div>
+			<div id=GTLdivGenerateThreejsLines ></div>
 
-		<div id=OVNdivObjectViewerNasa ></div>
+			<div id=CFRdivMenuCsvFileReader ></div>
 
-		<div id=CVDdivCsvViewerDashDotDot ></div>
+			<div id=OFRdivMenuObjFileReader ></div>
 
-		<div id=ORdivObjectRotation ></div>
+			<div id=OVGdivObjectViewerGallery ></div>
 
+			<div id=OVNdivObjectViewerNasa ></div>
 
-		<div id=MMSdivMeshMaterialSettings > </div>
+			<div id=CVDdivCsvViewerDashDotDot ></div>
 
-		<div id=DSSdivMenuDisplaySceneSettings ></div>
+		</details>
+
+		<details open >
+
+			<summary class=sumMenuTitle >Edit settings</summary>
+
+			<div id=ORdivObjectRotation ></div>
+
+			<div id=MMSdivMeshMaterialSettings > </div>
+
+			<div id=DSSdivMenuDisplaySceneSettings ></div>
+
+		</details>
 
 		<footer>
 
@@ -156,6 +172,8 @@ function init() {
 	hdrTitle.innerHTML = getTitle();
 
 	GTOdivMenuGenerateThreejsObjects.innerHTML = GTO.getMenu();
+
+	GTLdivGenerateThreejsLines.innerHTML = GTL.getMenu();
 
 	CFRdivMenuCsvFileReader.innerHTML = CFR.getMenu()
 

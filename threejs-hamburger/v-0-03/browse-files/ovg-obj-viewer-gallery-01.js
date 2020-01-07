@@ -1,3 +1,7 @@
+
+
+// copyright 2019 Theo Armour. MIT license.
+// 2019-12-18 v0.00.00
 /* global THREE, zoomObjectBoundingSphere, divMessage, eventResetAll, scene, mesh, controls*/
 // jshint esversion: 6
 // jshint loopfunc: true
@@ -7,8 +11,6 @@ const OVG = {};
 
 OVG.objData = [
 
-	"dashdotdotdashdotdot",
-	"https://rawcdn.githack.com/dashdotdotdashdotdot/Lines/master/venus.obj",
 	"Mr.doob",
 	"https://rawcdn.githack.com/mrdoob/three.js/master/examples/models/obj/cerberus/Cerberus.obj",
 	"https://rawcdn.githack.com/mrdoob/three.js/master/examples/models/obj/emerald.obj",
@@ -75,10 +77,14 @@ OVG.getMenu = function () {
 
 	<summary>OBJ viewer gallery</summary>
 
-	<div id=divMessage >Select an OBF file to load from curated list of OBJ files from around the internet. Some files are very large and take a long time to load. You may meed to zoom way in or way out to see the model.</div>
+	<div id=divMessage >
+		Select an OBJ file to load from curated list of OBJ files from around the Internet.
+		Some files are very large and take a long time to load.
+		You may need to zoom way in or way out to see the model.
+	</div>
 
 	<select id=selObj onchange=OVG.loadObj(this.value) size=30>${ options}</select>
-
+<!--
 	<p>
 		<button onclick=getFilesObj(); >get files obj</button>
 	</p>
@@ -86,8 +92,13 @@ OVG.getMenu = function () {
 	<p>
 		Help for adding new files. See source code.
 	</p>
+-->
 
-	<div id=divFilesObj ></div>
+	<div id=OVGdivXhr ></div>
+
+	<div id=OVGdivMessage ></div>
+
+	<hr>
 
 </details>
 	`;
@@ -125,9 +136,10 @@ OVG.getScript = function () {
 
 		OVG.objLoader = document.body.appendChild(document.createElement('script'));
 		//OVG.objLoader = setEditContents;
-		OVG.objLoader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r110/examples/js/loaders/OBJLoader.js";
+		OVG.objLoader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/loaders/OBJLoader.js";
 
 	}
+
 };
 
 
@@ -143,6 +155,8 @@ OVG.loadObj = function (index) {
 
 		function (object) {
 
+			//console.log('obj', object);
+
 			window.dispatchEvent(eventResetAll);
 
 			scene.remove(mesh);
@@ -155,18 +169,29 @@ OVG.loadObj = function (index) {
 
 			mesh.name = name;
 
+			//console.log('mesh', mesh.geometry.attributes.position.count );
+
 			scene.add(mesh);
 
 			controls.reset();
 
 			zoomObjectBoundingSphere();
 
+			OVGdivMessage.innerHTML =
+				`
+<p>
+name: ${ name }<br>
+vertices: ${ mesh.geometry.attributes.position.count.toLocaleString() }<br>
+faces: ${ ( mesh.geometry.attributes.position.count / 3 ).toLocaleString() }<br>
+</p>
+				`;
+
 		},
 
 
 		function (xhr) {
 
-			divMessage.innerHTML = `<p>${xhr.loaded.toLocaleString()} loaded</p>`;
+			OVGdivXhr.innerHTML = `<p>${xhr.loaded.toLocaleString()} bytes loaded</p>`;
 			//console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
 		},
@@ -187,8 +212,11 @@ OVG.getMeshesMergeGeometry = function (object) {
 
 	object.children.forEach(child => {
 
-		child.geometry = child.geometry.type === "BufferGeometry" ?
-			new THREE.Geometry().fromBufferGeometry(child.geometry) : child.geometry;
+		if ( child.geometry.isBufferGeometry ) {
+
+			child.geometry = new THREE.Geometry().fromBufferGeometry( child.geometry );
+
+		}
 
 		if (!child.geometry) { console.log('child', child); }
 
@@ -197,7 +225,6 @@ OVG.getMeshesMergeGeometry = function (object) {
 		const clone = child.geometry.clone();
 		clone.applyMatrix(new THREE.Matrix4().makeTranslation(-p.x, -p.y, -p.z));
 		clone.applyMatrix(new THREE.Matrix4().makeRotationX(0.5 * Math.PI));
-
 
 		geometry.merge(clone);
 
@@ -246,7 +273,7 @@ function getFilesObj() {
 		const files = json.tree.filter(item => item.path.endsWith(".obj")).map(item => item.path);
 
 		const txt = files.map(item => `"${prefix}${item}"`).join(",\n");
-		divFilesObj.innerHTML = `<textarea style=height:50ch;width:100%; >${ txt }</textarea>`;
+		OVGdivMessage.innerHTML = `<textarea style=height:50ch;width:100%; >${ txt }</textarea>`;
 
 		console.log( 'files', files  );
 
