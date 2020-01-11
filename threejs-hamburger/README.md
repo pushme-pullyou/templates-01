@@ -1,7 +1,7 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://jaanga.github.io/cookbook-threejs/examples/0-templates/ "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/0-templates/ "View file as a web page." ) </span>
 
 
-<div><input type=button onclick="window.location.href='https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/0-templates/README.md'";
+<div><input type=button onclick="window.location.href='https://github.com/pushme-pullyou/templates-01/tree/master/threejs-hamburger/'";
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 
@@ -24,8 +24,6 @@ _basic-html.html_
 <details open >
 <summary>To do and wish list </summary>
 
-* 2019-12-22 ~ Theo ~ Update to new animation sequence thingies
-
 
 
 </details>
@@ -40,7 +38,14 @@ _basic-html.html_
 <details open >
 <summary>Change log </summary>
 
-### 123
+### 2020-01-11 ~ Theo
+
+Not necessary
+
+* 2019-12-22 ~ Theo ~ Update to new animation sequence thingies
+
+
+### 2019-12-22
 
 * First commit
 

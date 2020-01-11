@@ -5,24 +5,35 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Basic TooToo HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
+
 <title></title>
+
 <style>
 
 	* { box-sizing: border-box; }
 
-	:root { font: 12pt monospace; --mnu-width: 22rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
+	:root { font: 100% monospace; --mnu-width: 22rem; --screen-width: calc( 100vw ); --headerHeight: 6rem; }
 
 	html { height: 100%; }
 
-	body { margin: 0 auto; max-width: 800px; padding: 0 0.5rem; }
+	body { margin: 0 auto; max-width: 80ch; padding: 0 0.5rem; }
 
 	a { color: crimson; text-decoration: none; }
 	a:hover, a:focus, a:active { background-color: yellow; color: #aaa; text-decoration: underline }
 
+	aside { border: 1px solid lightgray; margin-top: 15px; padding: 2px; }
+
+	blockquote { background-color: #ddd; padding: 1ch; }
+
 	button, input[type=button] { background-color: #ddd; border: none; color: #322; cursor: pointer; padding: 3px 5px; }
 	button:hover { background: #ccc; color: #fff }
 
-	summary { font-weight: bold }
+	code { background-color: #eee; }
+	pre { background-color: #eee; padding: 5px; }
+
+	summary { cursor: pointer; font-size: 2.5ch; font-weight: bold; }
+
+	.help { float: right; }
 
 	/*
 	main { border: 0px; height: 100%; left: var( --mnu-width ); margin: 0;
@@ -46,9 +57,10 @@
 				</a>
 
 				<a id=aTitle href="" title="Click to reload this page" ></a>
-				<span onmouseover=divDescription.hidden=false style=float:right;>?</span>
-			</h2>
 
+				<span class=help onmouseover=divDescription.hidden=false >?</span>
+
+			</h2>
 
 			<div id=divDescription onmouseout=divDescription.hidden=true hidden ></div>
 
@@ -64,7 +76,9 @@
 
 		<details open >
 
-			<summary>Summary</summary>
+			<summary>Summary <span class=help onmouseover=divDetails.hidden=false >?</span></summary>
+
+			<div id=divDetails onmouseout=divDetails.hidden=true hidden >How can I help you?</div>
 
 			<p>aaa bbb ccc 123</p>
 

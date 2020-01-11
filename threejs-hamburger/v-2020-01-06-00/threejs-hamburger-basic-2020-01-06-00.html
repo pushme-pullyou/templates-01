@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+<meta name=description
+	content="Real-time interactive 3D graphics in your browser using the WebGL and the Three.js JavaScript library">
+<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
+
+<title></title>
+
+<link href="assets/style.css" rel="stylesheet" >
+
+</head>
+
+<body>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/OrbitControls.js"></script>
+
+<nav id="navMenu">
+
+	<div id="divTitle">
+
+
+		<h2>
+			<a id=aSource target=_top title="Source code on GitHub" >
+				<img id=imgIcon height=18 style=opacity:0.5; >
+			</a>
+
+			<a id=aTitle href="" title="Click to reload this page" ></a>
+
+			<span class=help onmouseover=divDescription.hidden=false >?</span>
+
+		</h2>
+
+		<div id=divDescription onmouseout=divDescription.hidden=true hidden ></div>
+
+	</div>
+
+	<p>
+		<button onclick="addMeshes()">add meshes</button>
+	</p>
+
+	<p>
+		<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;">rotation</button>
+	</p>
+
+	<p>
+		<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
+	</p>
+
+	<div id="divLog"></div>
+
+	<br>
+
+</nav>
+
+<script src="three/thr-three.js" ></script>
+
+<script src="three/thrt-three-toggles-2020-01-06.js"></script>
+
+<script>
+
+aSource = "https://github.com/zzzzz/xxxxx.html";
+imgIcon.src = "https://pushme-pullyou.github.io/github-mark-32.png";
+aTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
+
+THR.init();
+THR.animate();
+
+</script>
+</body>
+</html>
