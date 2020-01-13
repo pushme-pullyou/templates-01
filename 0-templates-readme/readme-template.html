@@ -1,48 +1,70 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang=en >
 <head>
-<meta charset=utf-8 >
+<meta charset="utf-8" >
+<title>Open Index or Markdown</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=contain" >
+<meta name="description" content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
+<meta name="keywords" content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
+
+<style>
+
+:root { font: 100% monospace; }
+* { box-sizing: border-box; }
+body { margin: 0 auto; max-width: 80ch; }
+a { color: crimson; text-decoration: none; }
+a:hover, a:focus, a:active { text-decoration: underline; }
+aside { border: 1px solid lightgray; margin-top: 15px; padding: 2px; }
+button, input[type=button] { background-color: #eee; border: 2px #eee solid; color: #888; }
+blockquote { background-color: #ddd; padding: 1ch; }
+center { font-size: 2ch;}
+code { background-color: #eee; }
+pre { background-color: #eee; padding: 5px; }
+summary { cursor: pointer; font-size: 2.5ch; font-weight: bold; outline: none; }
+
+</style>
+
 </head>
 <body>
+
+	<div id=divContent ></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" ></script>
 <script>
-	// 2018-08-03. Copyright 2018 PushMe-PullYou authors. MIT License.
-	// this file is just to help you edit the template file locally
 
-	const protocol = location.protocol;
-	console.log( 'protocol', protocol );
+// https://github.com/showdownjs/showdown
+// Canonical version: https://github.com/pushme-pullyou/templates-01/tree/master/open-markdown-or-html
 
-	const pathname = location.pathname;
-	console.log( 'pathname', pathname);
+	let defaultFile = "index.html";
+	//location.hash = "../../../pushme-pullyou/tootoo14/pages/markdown-help.md"
+	location.hash = "README.md";
 
-	let path, pathFull;
+	let contents;
 
-	const repo = 'pushme-pullyou.github.io'; // rename to repo name
+	init();
 
-	if ( protocol === 'file:' ) {
+	function init() {
 
-		const sliceStart = pathname.indexOf( repo ) + repo.length + 1;
-		console.log( 'sliceStart', sliceStart );
+		showdown.setFlavor("github");
 
-		path = pathname.slice( sliceStart, pathname.lastIndexOf( '/' )  );
-		console.log( 'path', path );
+		location.hash.endsWith( ".md" ) ? onHashChange() : window.location.href = defaultFile + location.hash;
 
-		pathFull = path.replace( /-/g, '' ).replace( /\w+/g, '..' ).slice( 0 ) + '/index.html#' + path + '/README-template.md';
-
-	} else if ( protocol.includes( 'http' ) ) {
-
-		hash = pathname.slice(1, pathname.lastIndexOf( '/' ) );
-		console.log( 'hash', hash );
-		path = hash.replace( /-/g, '' ).replace( /\w+/g, '..' );
-
-		pathFull = path + '/index.html#' + hash + '/README-template.md';
+		window.addEventListener( "hashchange", onHashChange, false );
 
 	}
 
-	console.log( 'pathFull', pathFull );
+	function onHashChange() {
 
-	window.location.href = pathFull;
-	// comment above line to see how it works
+		const url = location.hash.slice( 1 );
+		document.title = url.split( "/" ).pop();
 
+		const xhr = new XMLHttpRequest();
+		xhr.open( "get", url, true );
+		xhr.onload = () => divContent.innerHTML = new showdown.Converter().makeHtml( xhr.responseText );
+		xhr.send( null );
+
+	}
 
 </script>
 </body>

@@ -1,51 +1,63 @@
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://jaanga.github.io/cookbook-threejs/examples/0-templates/ "View file as a web page." ) </span>
 
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/#xxxxx/README.md "View file as a web page." ) </span>
+<div><input type=button onclick="window.location.href='https://github.com/theo-armour/theo-armour.github.io/blob/master/snippets/0-templates/README.md'";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
-<div><input type=button class = "btn btn-secondary btn-sm" onclick=window.location.href="https://github.com/pushme-pullyou/pushme-pullyou.github.io/blob/master/xxxxx/README.md"
-value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
 
-<br>
-
-# [ZZZZZ Read Me]( #xxxxx/README.md )
+# [ZZZZZ Read Me]( #xxxxxx/README.md )
 
 <!--
-<iframe src=https://pushme-pullyou.github.io/xxxxx/xxxxx.html width=100% height=500px >Iframes are not viewable in GitHub source code views</iframe>
-_<small>ZZZZZ</small>_
+<iframe src=https://jaanga.github.io/cookbook/examples/xxxxxx/xxxxxx.html width=100% height=500px >Iframes are not viewable in GitHub source code view</iframe>
+_basic-html.html_
 
-## Full Screen: [ZZZZZ]( https://pushme-pullyou.github.io/xxxxx/xxxxx.html )
+### Full Screen: [ZZZZZ]( https://jaanga.github.io/cookbook/examples/xxxxxx/xxxxxx.html )
+
 -->
 
-
-## Concept
-
-
-## To Do / Wish List
+<details open >
+<summary>Concept</summary>
 
 
-## Issues
+</details>
+
+<details open >
+<summary>To do and wish list </summary>
 
 
-## Things you can do using this script
+</details>
+
+<details open >
+<summary>Issues </summary>
+
+
+</details>
+
+<details open >
+<summary> Things you can do using this script</summary>
 
 * Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
-* Click the Octocat icon to view or edit the source code on GitHub
-* Click on title to reload
+* Click the GitHub Octocat icon to view or edit the source code on GitHub
+* Click on title to reload te page
 * Press Control-U/Command-Option-U to view the source code
 * Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
 
+</details>
 
-## Links of Interest
+<details open >
+<summary>Links of interest</summary>
 
 
+</details>
 
-## Change Log
+<details open >
+<summary>Change log </summary>
 
-### XXX
+### 123
 
 * First commit
 
+</details>
 
 ***
 
 # <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
-
