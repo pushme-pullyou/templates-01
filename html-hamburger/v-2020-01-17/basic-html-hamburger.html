@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Basic TooToo HTML template with sliding menu">
+	<meta name="keywords" content="JavaScript,GitHub,FOSS">
+	<meta name="version" content="2020-01-17">
+	<title></title>
+
+	<link href="style-2020-01-11.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
+
+	<nav id="navMenu">
+
+		<header id="hdrTitle" >
+
+			<h2>
+				<a id=aSource target=_top title="Source code on GitHub" >
+					<img id=imgIcon height=18 style=opacity:0.5; >
+				</a>
+
+				<a id=aTitle href="" title="Click to reload this page" ></a>
+				<span id=sVersion ></span>
+				<span class=help onmouseover=divDescription.hidden=false >?</span>
+
+			</h2>
+
+			<div id=divDescription onmouseout=divDescription.hidden=true hidden ></div>
+
+		</header>
+
+		<p>
+			<button id=but onclick=setIt(); >set it</button>
+		</p>
+
+
+
+		<header id="hdrTitle" ></header>
+
+		<details open>
+
+			<summary class="sumMenuTitle" >details</summary>
+
+			<div id=divMenu ></div>
+
+		</details>
+
+		<footer>
+
+			<hr>
+
+			<center title="hello! click me to go up to the top"><a href=javascript:navMenu.scrollTo(0,0); > ❦ </a></center>
+
+		</footer>
+
+	</nav>
+
+	<div id="divMain">
+
+		<section id="secMainContent">
+
+			<header id="hdrMainTitle"></header>
+
+			<main id="mainContent">
+
+				<div id=divContent ></div>
+
+			</main>
+
+			<footer>
+
+				<center title="hello! click me to go up to the top"><a href=javascript:navMenu.scrollTop=0; > ❦ </a></center>
+
+			</footer>
+
+		</section>
+
+	</div>
+
+
+	<script>
+
+
+aSource.href = "https://github.com/zzzzz/xxxxx.html";
+imgIcon.src = "https://pushme-pullyou.github.io/github-mark-32.png";
+aTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+const version = document.head.querySelector( "[ name=version ]" );
+sVersion.innerHTML = version ? version.content : "";
+divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
+
+
+init();
+
+
+function init() {
+
+	hdrMainTitle.innerHTML = "<h1>Title</h1>"
+
+	divMenu.innerHTML += divContent.innerHTML += `${( new Date )}<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>`;
+
+	if ( window.innerWidth < 640 || window.innerHeight < 640 ) { toggleNavMenu(); }
+
+}
+
+
+
+function setIt() {
+
+	mainContents.innerHTML += `<p>${( performance.now() )} - Howdy! </p>`;
+
+}
+
+
+function toggleNavMenu() {
+
+	expandButton.classList.toggle( 'collapsed' );
+	navMenu.classList.toggle( 'collapsed' );
+	divMain.classList.toggle( 'collapsed' );
+
+}
+
+
+	</script>
+</body>
+
+</html>

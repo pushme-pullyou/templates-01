@@ -8,23 +8,23 @@
 <meta name=description
 	content="View models in 3D in your browser using the WebGL and the Three.js JavaScript library">
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-<meta name=version content="2020-01-11-00">
+<meta name=version content="2020-01-17">
 
 <title></title>
 
-<link href="assets/style-2020-01-11.css" rel="stylesheet">
+<link href="assets/style-2020-01-17.css" rel="stylesheet">
 
 <style>
 
 </style>
 </head>
 
-<body>
+<body style=margin:0;overflow:hidden; >
 
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/OrbitControls.js"></script>
 
-<script src="three/thr-three-2020-01-11-00.js"></script>
+<script src="three/thr-three-2020-01-16.js"></script>
 <script src="three/thra-three-add-2020-01-11-00.js"></script>
 
 
@@ -39,7 +39,10 @@
 					<img id=imgIcon height=18 style=opacity:0.5; >
 				</a>
 
-				<a href="" title="Click to reload this page" ><span id=sTitle ></span> <span id=sVersion ></span></a>
+				<a href="" title="Click to reload this page" >
+					<span id=sTitle ></span>
+					<span id=sVersion ></span>
+				</a>
 
 				<span class="couponcode" >??<span id=divDescription class="coupontooltip" ></span></span>
 
@@ -47,20 +50,7 @@
 
 		</header>
 
-		<p>
-			<button onclick=THR.controls.reset(); title="Return to default view">reset view</button>
-
-			<button onclick=THR.zoomObjectBoundingSphere(PHJ.group); title="zoom without shifting camera angle">zoom all</button>
-
-		</p>
-
-		<p>
-			<button onclick="THR.controls.autoRotate=!THR.controls.autoRotate">rotation</button>
-		</p>
-
-		<p>
-			<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
-		</p>
+		<div id=THRVdivThreejsView ></div>
 
 		<details open>
 
@@ -74,11 +64,30 @@
 
 		</details>
 
+
+		<details open>
+
+			<summary class=sumMenuTitle>Scene</summary>
+
+			<div id=TSGdivThreeSceneGround ></div>
+
+			<div id= ></div>
+
+			<div id= ></div>
+
+
+		</details>
+
+
 		<details open>
 
 			<summary class=sumMenuTitle>Settings</summary>
 
 			<div id=THRTdivToggles ></div>
+
+			<div id=STMdivSettingsThemeMenu ></div>
+
+			<div id=STMDdivSettingsThemeMenuDropin ></div>
 
 
 		</details>
@@ -89,7 +98,7 @@
 
 			<hr>
 
-			<center title="go to top of menu" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; >
+			<center title="go to top of menu" ><a href=javascript:navMenu.scrollTo(0,0); style=text-decoration:none; >
 			<img src="assets/spider.ico" height=24 ></a>
 			</center>
 
@@ -97,13 +106,25 @@
 
 	</nav>
 
-	<main id=main>
+	<div id=divMain >
 
-		<div id="divContent"></div>
+		<main id=main >
 
-	</main>
+			<div id="divContent" ></div>
+
+		</main>
+
+	</div>
 
 <script src="three/thrt-three-toggles-2020-01-11-00.js"></script>
+<script src="three/thrv-three-view-2020-01-16.js"></script>
+
+<script src="scene/ground/v-2020-01-17/tsg-three-scene-ground.js"></script>
+
+<script src="settings/shm-settings-html-testing.js"></script>
+<script src=settings/theme/v-2020-01-17/stm-settings-theme-menu.js></script>
+<script src=settings/theme-dropin/v-2020-01-17/stmd-settings-theme-menu-dropin.js></script>
+
 <!--
 	<script src="browse-files/gfl-github-file-list-2020-01-10-00.js"></script>
 	<script src="json-view/jtv-json-tree-view-2020-01-10-00.js"></script>
@@ -111,39 +132,7 @@
 	<script src="parse/phj-parse-honeybee-json-2020-01-10.js"></script>
 -->
 
-<script>
+<script src=main.js ></script>
 
-aSource.href = "https://github.com/pushme-pullyou/templates-01/tree/master//threejs-hamburger";
-imgIcon.src = "assets/github-mark-32.png";
-sTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
-const version = document.head.querySelector( "[ name=version ]" );
-sVersion.innerHTML = version ? version.content : "";
-divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
-
-THR.init();
-THR.animate();
-
-
-init();
-
-
-function init() {
-
-	if ( window.innerWidth < 640 || window.innerHeight < 640 ) {
-		toggleNavMenu();
-	}
-
-}
-
-function toggleNavMenu() {
-
-	expandButton.classList.toggle( 'collapsed' );
-	navMenu.classList.toggle( 'collapsed' );
-	divContent.classList.toggle( 'collapsed' );
-
-}
-
-
-</script>
 </body>
 </html>

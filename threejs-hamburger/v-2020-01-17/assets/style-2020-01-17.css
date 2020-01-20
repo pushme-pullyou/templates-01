@@ -15,7 +15,7 @@
 
 body {
 	margin: 0;
-	overflow: hidden;
+	overflow: auto;
 }
 
 a {
@@ -143,6 +143,7 @@ summary {
 	overflow: auto;
 	padding: 0 1rem;
 	position: fixed;
+	resize:both;
 	transition: left 0.5s;
 	top: 0;
 	width: var(--mnu-width);
