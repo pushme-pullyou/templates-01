@@ -80,7 +80,8 @@ STM.appendScript = function () {
 STM.getCard = function () {
 
 	const htm = `
-<p>
+
+	<p>
 	<button id="btnRed" class=button >red</button>
 	<button id="btnBlue" class=button >blue</button>
 	<button id="btnGreen" class=button >green</button>
@@ -125,7 +126,6 @@ STM.getCard = function () {
 STM.initialize = function () {
 
 	const txt = localStorage.getItem( "theme" ) || "[]";
-	console.log( 'txt', txt );
 
 	const theme = JSON.parse(txt).forEach(item => {
 		const key = Object.keys(item)[0];
@@ -188,15 +188,12 @@ STM.onInput = function() {
 
 
 STM.setStorageHsl = function() {
-
-	inputs = Array.from( document.querySelectorAll( "details p input" ) );
-	
-	const theme = inputs.filter( item => item.id.startsWith( "inp" ) ).map(item => {
+	const inputs = Array.from(document.querySelectorAll("details p input"));
+	const theme = inputs.map(item => {
 		return JSON.parse(`{ "${item.id}": ${item.value} }`);
 	});
 
 	localStorage.setItem("theme", JSON.stringify(theme));
-
 };
 
 

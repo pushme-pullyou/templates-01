@@ -1,4 +1,4 @@
-/* global THREE, divContents */
+/* globals THREE, divContents */
 // jshint esversion: 6
 // jshint loopfunc: true
 
@@ -7,7 +7,8 @@ let THR = {};
 
 THR.sceneRotation = 1;
 
-THR.init = function() {
+
+THR.init = function () {
 
 	const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 	camera.position.set( - 100, - 100, 100 );
@@ -26,7 +27,7 @@ THR.init = function() {
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-	const controls = new THREE.OrbitControls( camera, renderer.domElement );
+	const controls = new THREE.TrackballControls( camera, renderer.domElement );
 	controls.maxDistance = 500;
 	controls.rotateSpeed = 2;
 	//controls.maxPolarAngle = Math.PI * 0.5;
@@ -41,18 +42,19 @@ THR.init = function() {
 	THR.camera = camera; THR.scene = scene; THR.renderer = renderer; THR.controls = controls;
 
 
-	let event = new Event( "onloadthree", {"bubbles": true, "cancelable": false, detail: true } );
+	let event = new Event( "onloadthree", { "bubbles": true, "cancelable": false, detail: true } );
 
 	window.addEventListener( "onloadthree", THR.onLoad, false );
 
 	window.dispatchEvent( event );
 
-}
+};
+
 
 
 THR.onLoad = function ( event ) {
 
-	console.log( 'event', event );
+	console.log( 'event thr', event );
 
 };
 
@@ -79,4 +81,6 @@ THR.animate = function() {
 	THR.controls.update();
 	THR.scene.rotation.z += THR.sceneRotation / 1000;
 
-}
+};
+
+
