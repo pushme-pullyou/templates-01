@@ -8,7 +8,7 @@
 <meta name=description
 	content="View models in 3D in your browser using the WebGL and the Three.js JavaScript library">
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-<meta name=version content="2020-01-17">
+<meta name=version content="2020-01-23">
 
 <title></title>
 
@@ -22,10 +22,11 @@
 <body style=margin:0;overflow:hidden; >
 
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
 
-<script src="three/thr-three-2020-01-16.js"></script>
-<script src="three/thra-three-add-2020-01-11-00.js"></script>
+<script src="three/thr-three-2020-01-21.js"></script>
+<script src="three/thra-three-add-2020-01-21.js"></script>
+
 
 
 	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
@@ -67,23 +68,12 @@
 
 		<details open>
 
-			<summary class=sumMenuTitle>Scene</summary>
+			<summary class=sumMenuTitle>Settings</summary>
+
 
 			<div id=TSGdivThreeSceneGround ></div>
 
-			<div id= ></div>
-
-			<div id= ></div>
-
-
-		</details>
-
-
-		<details open>
-
-			<summary class=sumMenuTitle>Settings</summary>
-
-			<div id=THRTdivToggles ></div>
+			<div id=TSFdivThreeSceneFog  ></div>
 
 			<div id=STMdivSettingsThemeMenu ></div>
 
@@ -116,10 +106,16 @@
 
 	</div>
 
-<script src="three/thrt-three-toggles-2020-01-11-00.js"></script>
-<script src="three/thrv-three-view-2020-01-16.js"></script>
+	<!--
 
-<script src="scene/ground/v-2020-01-17/tsg-three-scene-ground.js"></script>
+		<script src="three/thrt-three-toggles-2020-01-21-01.js"></script>
+	-->
+<script src="three/thrv-three-view-2020-01-21.js"></script>
+
+
+<script src="scene/ground/v-2020-01-23/tsg-three-scene-ground.js"></script>
+<script src="scene/fog/v-2020-01-23/tsf-three-scene-fog.js"></script>
+
 
 <script src="settings/shm-settings-html-testing.js"></script>
 <script src=settings/theme/v-2020-01-17/stm-settings-theme-menu.js></script>

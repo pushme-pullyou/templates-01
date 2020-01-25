@@ -1,55 +1,56 @@
 
 const THRA = {};
 
+
 THRA.init = function () {
 
-	window.addEventListener( "onloadthree", THRA.addThings, false );
-
-	
+	//window.addEventListener( "onloadthree", THRA.addThings, false );
 
 };
 
 
 
-THRA.addThings = function ( event ) {
-
-	console.log( 'thra', event );
-
-	THRA.addLights();
-
-	THRA.addMesh();
-
-}
+THRA.onLoad = function () {
 
 
-THRA.addLights = function() {
+	THRA.addLightDirectionals();
+
+	THR.group = THRA.addMeshes();
+
+};
+
+
+
+THRA.addLightDirectionals = function() {
 
 	const scene = THR.scene;
 	const camera = THR.camera;
 
 
-	//scene.add( new THREE.AmbientLight( 0x404040 ) );
-	scene.add( new THREE.AmbientLight( 0x666666 ) );
+	scene.add( new THREE.AmbientLight( 0x888888) );
+	//scene.add( new THREE.AmbientLight( 0x666666 ) );
 
-	const pointLight = new THREE.PointLight( 0xffffff, 0.5 );
+	const pointLight = new THREE.PointLight( 0xffffff, 0.1 );
 	pointLight.position.copy( camera.position );
 	camera.add( pointLight );
 
-	const light = new THREE.DirectionalLight( 0xdfebff, 0.5 );
-	light.position.set( -5, -20, 10 );
-	light.castShadow = true;
-	light.shadow.mapSize.width = 1024;
-	light.shadow.mapSize.height = 1024;
+	const lightDirectional = new THREE.DirectionalLight( 0xdfebff, 0.7 );
+	lightDirectional.position.set( -50, -200, 100 );
+	lightDirectional.castShadow = true;
+	lightDirectional.shadow.mapSize.width = 1024;
+	lightDirectional.shadow.mapSize.height = 1024;
 
-	var d = 20;
-	light.shadow.camera.left = - d;
-	light.shadow.camera.right = d;
-	light.shadow.camera.top = d;
-	light.shadow.camera.bottom = - d;
-	light.shadow.camera.far = 5 * d;
-	scene.add( light );
+	var d = 100;
+	lightDirectional.shadow.camera.left = - d;
+	lightDirectional.shadow.camera.right = d;
+	lightDirectional.shadow.camera.top = d;
+	lightDirectional.shadow.camera.bottom = - d;
+	lightDirectional.shadow.camera.far = 5 * d;
+	scene.add( lightDirectional );
 
-	//scene.add( new THREE.CameraHelper( light.shadow.camera ) );
+	THR.lightDirectional = lightDirectional;
+
+	scene.add( new THREE.CameraHelper( lightDirectional.shadow.camera ) );
 
 }
 
@@ -69,9 +70,7 @@ THRA.addMesh = function( size = 20 ) {
 	//const material = new THREE.MeshNormalMaterial();
 	const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), specular: 0xffffff } );
 	mesh = new THREE.Mesh( geometry, material );
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;
-	THR.scene.add( mesh );
+
 
 	return mesh;
 
@@ -83,18 +82,22 @@ THRA.addMeshes= function( count = 100 ) {
 
 	THR.scene.remove( meshGroup );
 
-	meshGroup = new THREE.Group();
+	const group = new THREE.Group();
 
-	for ( let i = 0; i < count; i++ ) { meshGroup.add( THRA.addMesh() ) };
+	for ( let i = 0; i < count; i++ ) { group.add( THRA.addMesh() ) };
 
-	meshGroup.children.forEach( mesh => {
+	group.children.forEach( mesh => {
 
 		mesh.position.set( Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50 );
 		mesh.rotation.set( 0.2 * Math.random(), 0.2 * Math.random(), 0.2 * Math.random() );
+		mesh.receiveShadow = true;
+		mesh.castShadow = true;
 
 	} );
 
-	THR.scene.add( meshGroup );
+	THR.scene.add( group );
+
+	return group;
 
 }
 

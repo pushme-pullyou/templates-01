@@ -5,8 +5,14 @@
 let mesh, meshGroup;
 let THR = {};
 
-THR.sceneRotation = 1;
+THR.center = new THREE.Vector3( 0, 0, 0 );
+THR.radius = 50;
 
+THR.group = undefined;
+
+THR.cameraAngle = 0;
+THR.cameraRadius = 141.4;
+THR.cameraDelta = 0.005;
 
 THR.init = function () {
 
@@ -19,7 +25,7 @@ THR.init = function () {
 	scene.fog = new THREE.Fog( 0xcce0ff, 9999, 999999 );
 	scene.add( camera );
 
-	const renderer = new THREE.WebGLRenderer( { antialias: true } );
+	const renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
@@ -36,11 +42,13 @@ THR.init = function () {
 	window.addEventListener( 'resize', THR.onWindowResize, false );
 	window.addEventListener( 'orientationchange', THR.onWindowResize, false );
 
-	window.addEventListener( 'keyup', () => THR.sceneRotation = 0, false );
-	renderer.domElement.addEventListener( 'click', () => THR.sceneRotation = 0, false );
+	window.addEventListener( 'keydown', THR.onStart );
+	renderer.domElement.addEventListener( 'wheel', THR.onStart );
+	renderer.domElement.addEventListener( 'mousedown', THR.onStart );
+	renderer.domElement.addEventListener( 'touchstart', THR.onStart );
+
 
 	THR.camera = camera; THR.scene = scene; THR.renderer = renderer; THR.controls = controls;
-
 
 	let event = new Event( "onloadthree", { "bubbles": true, "cancelable": false, detail: true } );
 
@@ -56,7 +64,30 @@ THR.onLoad = function ( event ) {
 
 	console.log( 'event thr', event );
 
+	THRA.onLoad();
+
+	TSG.onLoad();
+
+	TSF.onLoad();
+
+	THRV.zoomToFitObject();
+
 };
+
+
+THR.onStart = function () {
+
+	THRVchkDelta.checked = false;
+
+	THR.cameraDelta = 0;
+
+	window.removeEventListener( 'keydown', THR.onStart );
+	THR.renderer.domElement.removeEventListener( 'heel', THR.onStart );
+	THR.renderer.domElement.removeEventListener( 'mousedown', THR.onStart );
+	THR.renderer.domElement.removeEventListener( 'touchstart', THR.onStart );
+
+};
+
 
 
 THR.onWindowResize = function () {
@@ -79,7 +110,15 @@ THR.animate = function() {
 	requestAnimationFrame( THR.animate );
 	THR.renderer.render( THR.scene, THR.camera );
 	THR.controls.update();
-	THR.scene.rotation.z += THR.sceneRotation / 1000;
+	//THR.scene.rotation.z += THR.sceneRotation / 1000;
+
+	if ( THR.cameraDelta ) {
+
+		THR.camera.position.x = THR.cameraRadius * Math.cos( THR.cameraAngle );
+		THR.camera.position.y = THR.cameraRadius * Math.sin( THR.cameraAngle );
+		THR.cameraAngle += THR.cameraDelta;
+
+	}
 
 };
 

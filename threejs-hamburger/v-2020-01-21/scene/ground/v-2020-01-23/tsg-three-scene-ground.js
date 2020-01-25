@@ -12,9 +12,19 @@ TSG.url = "https://api.github.com/repos/mrdoob/three.js/git/trees/master?recursi
 TSG.prefix = "https://rawcdn.githack.com/mrdoob/three.js/master/";
 
 
+
 TSG.init = function () {
 
 	TSGdivThreeSceneGround.innerHTML = TSG.getMenu();
+
+	//window.addEventListener( "onloadthree", TSG.onLoad, false );
+
+};
+
+
+TSG.onLoad = function () {
+
+	TSG.toggleAxesHelper();
 
 	TSG.toggleGroundHelper();
 
@@ -25,10 +35,10 @@ TSG.init = function () {
 TSG.getMenu = function () {
 
 	const htm = `
-<details ontoggle=TSG.getFilesPnGThree(); open>
+<details ontoggle=TSG.getFilesPnGThree();>
 
 	<summary>
-		Scene ground
+		Scene axes and ground
 
 		<span class="couponcode">??? <span class="coupontooltip">
 		Update the appearance of the ground mesh in the scene.
@@ -36,26 +46,35 @@ TSG.getMenu = function () {
 
 	</summary>
 
-	<p title="XYZ = RGB" >
+	<p  title="XYZ = RGB" >
+		<label>
+			<input type=checkbox onchange=TSG.toggleAxesHelper(THR.radius,this.checked) checked> axes helper
+		</label>
+	</p>
+
+	<p title="">
 
 		<label>
-			<input type=checkbox onchange=THRT.toggleGroundHelper(); > ground
+			<input type=checkbox onchange=TSG.toggleGroundHelper(); checked> ground
 		</label>
 	</p>
 
 	<p>
 		<label>
-			<input type="color" value="#ff00ff" id="DSSinpColorGround"
+			<input type="color" value="#ff00ff" id="TSGinpColorGround"
 				oninput="THR.groundHelper.material.color=( new THREE.Color(this.value));" >
 			Select ground color
 		</label>
 	</p>
 
 	<p>
-	<select id=TSGselPng onchange=TSG.loadPng(this.value) size=20 style=width:100%;></select>
+		<select id=TSGselPng onchange=TSG.loadPng(this.value) size=20 style=width:100%;></select>
 	</p>
 
-	<div id=TSGdivMessage ></div>
+	<p>
+		Opacity <output id=outGroundOpacity >0.95</output>
+		<input type=range value=95 oninput=outGroundOpacity.value=THR.groundHelper.material.opacity=+this.value/100; >
+	</p>
 
 </details>`;
 
@@ -65,9 +84,33 @@ TSG.getMenu = function () {
 
 
 
-TSG.toggleGroundHelper = function ( position = THR.scene.position.clone(), elevation = -50.1) {
+TSG.toggleAxesHelper = function ( scale = THR.radius, visible = true ) {
 
-	// move to THRT but z min should be zero
+	console.log( '', visible );
+
+	axesHelper = THR.axesHelper;
+
+	if ( !axesHelper ) {
+
+		axesHelper = new THREE.AxesHelper(100);
+		THR.scene.add( axesHelper );
+
+	} else {
+
+		axesHelper.visible = visible;
+
+	}
+
+	axesHelper.scale.set( scale, scale, scale );
+	axesHelper.name = "axesHelper";
+	axesHelper.position.copy( THR.center );
+	THR.axesHelper = axesHelper;
+
+};
+
+
+
+TSG.toggleGroundHelper = function ( position = THR.scene.position.clone(), elevation = -50.1 ) {
 
 	if ( !THR.groundHelper ) {
 
@@ -85,8 +128,8 @@ TSG.toggleGroundHelper = function ( position = THR.scene.position.clone(), eleva
 
 		const geometry = new THREE.PlaneGeometry( 20 * THR.radius, 20 * THR.radius );
 
-		color = new THREE.Color().setHex( THRTinpColorGround.value );
-		const material = new THREE.MeshPhongMaterial( { color: 0x888888, opacity: 0.5, side: 2 } );
+		color = new THREE.Color().setHex( TSGinpColorGround.value );
+		const material = new THREE.MeshPhongMaterial( { color: 0x888888, opacity: 0.95, side: 2, transparent: true } );
 		THR.groundHelper = new THREE.Mesh( geometry, material );
 		THR.groundHelper.receiveShadow = true;
 
@@ -104,36 +147,41 @@ TSG.toggleGroundHelper = function ( position = THR.scene.position.clone(), eleva
 };
 
 
+
 TSG.getFilesPnGThree = function () {
 
-	fetch(TSG.url)
-		.then(response => response.json())
-		.then(json => {
+	fetch( TSG.url )
+		.then( response => response.json() )
+		.then( json => {
 
-			TSG.pngData = json.tree.filter(item => item.path.includes("textures")).map(item => item.path);
+			TSG.pngData = json.tree.filter( item => item.path.includes( "textures" ) &&
+				( item.path.endsWith( ".png" ) || item.path.endsWith( ".jpg" ) ) ).map( item => item.path );
 
 			TSGselPng.innerHTML = TSG.getOptions();
 
-		});
+		} );
 
 };
 
 
+
 TSG.getOptions = function () {
 
-	const options = TSG.pngData.map((item, index) => {
+	const options = TSG.pngData.map( ( item, index ) => {
 
-		return `<option value=${index}>${item.split("/").pop()}</option>`;
+		return `<option value=${ index }>${ item.split( "/" ).pop() }</option>`;
 
-	});
+	} );
 
 	return options;
 
 };
 
+
+
 TSG.loadPng = function ( index ) {
 
-	item = TSG.pngData[ index ]
+	item = TSG.pngData[ index ];
 
 	url = TSG.prefix + item;
 
@@ -142,14 +190,15 @@ TSG.loadPng = function ( index ) {
 
 	loader.load( url, callback );
 
-	function callback ( texture ){
+	function callback ( texture ) {
 
-		THR.groundHelper.material = new THREE.MeshPhongMaterial( { map: texture, side: 2 } );
+		THR.groundHelper.material = new THREE.MeshPhongMaterial( { map: texture, side: 2, transparent: true } );
 		texture.needsUpdate = true;
 		THR.groundHelper.material.needsUpdate = true;
 
 	}
 
-}
+};
+
 
 TSG.init();

@@ -14,8 +14,6 @@ THRV.init = function () {
 
 	THRVdivThreejsView.innerHTML = THRV.getMenu();
 
-	
-
 };
 
 
@@ -28,27 +26,36 @@ THRV.getMenu = function () {
 	<summary>
 		View
 
-		<span class="couponcode">??? <span class="coupontooltip">control the camera</span></span>
+		<span class="couponcode">?? <span class="coupontooltip">control the camera</span></span>
 
 	</summary>
 
 	<p>
 		<button onclick=THR.controls.reset(); title="Return to default view">reset view</button>
 
-		<button onclick=THRV.zoomObjectBoundingSphere(meshGroup); title="zoom without shifting camera angle">zoom all</button>
+		<button onclick=THRV.zoomToFitObject(); title="zoom without shifting camera angle">zoom fit</button>
 
+	</p>
+	<p>
+		<label>
+			<input type=checkbox id=THRVchkDelta onclick="THRV.setCameraPositionDelta()" checked>
+			rotation <output id=outDelta >0.005<output>
+		</label>
 	</p>
 
 	<p>
-		<button onclick="THR.controls.autoRotate=!THR.controls.autoRotate">rotation</button>
+		<input type="range" id=rngDelta  value=75 onclick="THRV.setCameraPositionDelta()" title="rotation speed" >
 	</p>
-
 	<p>
-		<input type="range" onclick="THR.controls.autoRotateSpeed=+this.value/10-5;" title="rotation speed" >
+		<button onclick=THRV.setCameraPosition(0,0,200)>top</button>
+		<button onclick=THRV.setCameraPosition(0,0,-200)>bottom</button>
+		<button onclick=THRV.setCameraPosition(0,-300,0)>front</button>
+		<button onclick=THRV.setCameraPosition(0,300,0)>back</button>
+		<button onclick=THRV.setCameraPosition(-300,-0,0)>left</button>
+		<button onclick=THRV.setCameraPosition(300,-0,0)>right</button>
 	</p>
 
-
-	<div id=TMPdivMessage ></div>
+	<div id=THRVdivMessage ></div>
 
 </details>`;
 
@@ -58,55 +65,78 @@ THRV.getMenu = function () {
 
 
 
-THRV.zoomObjectBoundingSphere = function ( obj = meshGroup ) {
-	//console.log( "obj", obj );
+THRV.zoomToFitObject = function (camera = THR.camera, controls = THR.controls, object = THR.group, fitOffset = 1.2  ) {
 
-	THR.center = new THREE.Vector3( 0, 0, 0 );
-	THR.radius=  50;
+	const box = new THREE.Box3().setFromObject( object );
 
-	const bbox = new THREE.Box3().setFromObject( obj );
-	//console.log( 'bbox', bbox );
+	//for ( const object of selection ) box.expandByObject( object );
 
-	if ( bbox.max.x !== Infinity ) {
+	const size = box.getSize( new THREE.Vector3() );
+	const center = box.getCenter( new THREE.Vector3() );
 
-		const sphere = bbox.getBoundingSphere( new THREE.Sphere() );
+	const maxSize = Math.max( size.x, size.y, size.z );
+	const fitHeightDistance = maxSize / ( 2 * Math.atan( Math.PI * camera.fov / 360 ) );
+	const fitWidthDistance = fitHeightDistance / camera.aspect;
+	const distance = fitOffset * Math.max( fitHeightDistance, fitWidthDistance );
 
-		THR.center = sphere.center;
-		THR.radius = sphere.radius;
-		//console.log( "sphere", sphere )
-	}
+	const direction = controls.target.clone()
+	  .sub( camera.position )
+	  .normalize()
+	  .multiplyScalar( distance );
 
-	THR.controls.target.copy( THR.center ); // needed because model may be far from origin
-	THR.controls.maxDistance = 10 * THR.radius;
+	controls.maxDistance = distance * 10;
+	controls.target.copy( center );
 
-	delta = THR.camera.position.clone().sub( THR.controls.target ).normalize();
-	//console.log( 'delta', delta );
+	camera.near = distance / 100;
+	camera.far = distance * 100;
+	camera.updateProjectionMatrix();
 
-	//position = THR.controls.target.clone().add( delta.multiplyScalar( 2 * THR.radius ) );
-	//console.log( 'position', position );
+	THR.scene.fog.near = distance * 2;
+	THR.scene.fog.far = distance * 2.5;
 
-	distance = THR.controls.target.distanceTo( THR.camera.position );
+	camera.position.copy( controls.target ).sub(direction);
 
-	THR.camera.zoom = distance / ( 2 * THR.radius ) ;
-
-	//THR.camera.position.copy( THR.center.clone().add( new THREE.Vector3( -2 * THR.radius, 2 * THR.radius, 1.0 * THR.radius ) ) );
-	THR.camera.near = 0.001 * THR.radius; //2 * camera.position.length();
-	THR.camera.far = 20 * THR.radius; //2 * camera.position.length();
-	THR.camera.updateProjectionMatrix();
+	controls.update();
 
 	let event = new Event( "onresetthree", {"bubbles": true, "cancelable": false, detail: true } );
 
 	//window.addEventListener( "onrresetthree", doThings, false );
 
-	// listening: or-object-rotation-xx.js
-	// listening: dss-display-scene-settings-xx.js
-
 	window.dispatchEvent( event );
+
+}
+
+
+
+THRV.setCameraPositionDelta = function () {
+
+	if ( THRVchkDelta.checked ) {
+
+		THR.cameraDelta = Number( rngDelta.value )/ 5000 - 0.01;
+
+		outDelta.value = THR.cameraDelta.toLocaleString();
+
+	} else {
+
+		THR.cameraDelta = 0;
+
+	}
 
 };
 
 
+THRV.setCameraPosition = function( x = -100, y = -100, z = 100 ) {
 
+	THR.camera.position.set( x, y, z );
+
+	THR.camera.up.set( 0, 0, 1 );
+
+	THRVchkDelta.checked = false;
+	THR.cameraDelta = 0;
+
+	//THRV.zoomObjectBoundingSphere(mesh);
+
+}
 
 
 THRV.init();
