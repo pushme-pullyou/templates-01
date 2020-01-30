@@ -1,4 +1,17 @@
-# Basic HTML Hamburger Read Me
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/templates-01/html-hamburger/ "View file as a web page." ) </span>
+
+<div><input type=button onclick=window.location.href="https://github.com/pushme-pullyou/templates-01/tree/master/html-hamburger/";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
+
+
+# [HTMK hamburger Read Me]( #README.md )
+
+<!--
+<iframe src=https://pushme-pullyou.github.io/ width=100% height=500px >Iframes are not viewable in GitHub source code view</iframe>
+_basic-html.html_
+-->
+
+### Full Screen: [HTMK hamburger]( https://pushme-pullyou.github.io/templates-01/html-hamburger/index.html )
 
 
 <details open >
@@ -10,30 +23,41 @@ Rules
 * Calls no modules
 
 
-See TooToo light for versions with more features
+</details>
+
+<details open >
+<summary>To do and wish list </summary>
 
 
 </details>
 
-
-<details>
-<summary>To Do / Wish List</summary>
-
-
-</details>
-
-
-<details>
-<summary>Issues</summary>
+<details open >
+<summary>Issues </summary>
 
 
 </details>
 
+<details open >
+<summary> Things you can do using this script</summary>
 
-<details>
-<summary>Change Log</summary>
+* Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
+* Click the GitHub Octocat icon to view or edit the source code on GitHub
+* Click on title to reload te page
+* Press Control-U/Command-Option-U to view the source code
+* Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
 
-### 2019-09-30 ~ Theo
+</details>
+
+<details open >
+<summary>Links of interest</summary>
+
+
+</details>
+
+<details open >
+<summary>Change log </summary>
+
+### 123
 
 * First commit
 

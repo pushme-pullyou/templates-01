@@ -12,7 +12,7 @@ value='You are now in a GitHub web page view - Click this button to view this re
 _basic-html.html_
 
 -->
-### Full Screen: [Three.js Hamburger]( https://pushme-pullyou.github.io/0-templates/threejs-hamburger/index.html )
+### Full Screen: [Three.js Hamburger]( https://pushme-pullyou.github.io/templates-01/threejs-hamburger/index.html )
 
 
 <details open >

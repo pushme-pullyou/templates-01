@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Basic TooToo HTML template with sliding menu">
+	<meta name="keywords" content="JavaScript,GitHub,FOSS">
+	<meta name="version" content="2020-01-21">
+	<title></title>
+
+	<link href="assets/style-2020-01-17.css" rel="stylesheet">
+
+	<style>
+
+		body {
+			margin: 0;
+			overflow: hidden;
+		}
+	</style>
+
+</head>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
+
+<script src="../thr-three-2020-01-21.js"></script>
+<script src="../thra-three-add-2020-01-21.js"></script>
+
+	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
+
+	<nav id="navMenu">
+
+		<header id="hdrTitle" >
+
+			<h2>
+				<a id=aSource target=_top title="Source code on GitHub" >
+					<img id=imgIcon height=18 style=opacity:0.5; >
+				</a>
+
+				<a href="" title="Click to reload this page" >
+					<span id=sTitle ></span>
+					<span id=sVersion ></span>
+				</a>
+
+				<span class="couponcode" >??<span id=divDescription class="coupontooltip" ></span></span>
+
+			</h2>
+
+		</header>
+
+
+		<div id=THRVdivThreejsView ></div>
+
+		<details open>
+
+			<summary class="sumMenuTitle" >details</summary>
+
+			<div id=divMenu ></div>
+
+		</details>
+
+		<details open>
+
+			<summary class="sumMenuTitle" >Settings</summary>
+
+			<div id=THRTdivToggles ></div>
+			<!--
+
+				<div id=STMdivSettingsThemeMenu ></div>
+
+				<div id=STMDdivSettingsThemeMenuDropin ></div>
+			-->
+
+		</details>
+
+		<footer>
+
+			<hr>
+
+			<center title="hello! click me to go up to the top"><a href=javascript:navMenu.scrollTo(0,0); > ❦ </a></center>
+
+		</footer>
+
+	</nav>
+
+	<div id="divMain">
+
+		<section id="secMainContent">
+
+			<header id="hdrMainTitle"></header>
+
+			<main id="mainContent">
+
+				<div id=divContent ></div>
+
+			</main>
+
+			<footer>
+
+				<center title="hello! click me to go up to the top"><a href=javascript:navMenu.scrollTop=0; > ❦ </a></center>
+
+			</footer>
+
+		</section>
+
+	</div>
+
+<script src=main.js></script>
+
+
+<script src="../thrt-three-toggles-2020-01-21-01.js"></script>
+<script src="../thrv-three-view-2020-01-21.js"></script>
+
+<!--
+<script src="settings/shm-settings-html-testing.js"></script>
+<script src=settings/theme/v-2020-01-17/stm-settings-theme-menu.js></script>
+<script src=settings/theme-dropin/v-2020-01-17/stmd-settings-theme-menu-dropin.js></script>
+-->
+
+</body>
+</html>
