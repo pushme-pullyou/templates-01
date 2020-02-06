@@ -54,6 +54,8 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
 
+
+
 <nav id="navMenu">
 
 	<header id="hdrTitle">
@@ -85,9 +87,11 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 	</p>
 
 	<p>
-		<output id=outSpeed>50</output>
-		<input type="range" id="inpSpeed" onclick="sceneRotation=0.05 * this.value;outSpeed.innerHTML=this.value;" />
+		<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
 	</p>
+
+	<div id=FRGdivFileReaderGeneric ></div>
+
 
 	<div id="divLog"></div>
 
@@ -95,7 +99,7 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 
 <script>
 
-aSource.href = "https://github.com/zzzzz/xxxxx.html";
+aSource = "https://github.com/zzzzz/xxxxx.html";
 imgIcon.src = "https://pushme-pullyou.github.io/github-mark-32.png";
 
 sTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
@@ -121,7 +125,7 @@ function init() {
 
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0xcce0ff );
-	//scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
+	scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
 	scene.add( camera )
 
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -330,10 +334,13 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
-	mesh.rotation.z += sceneRotation / 1000;
+	//scene.rotation.z += sceneRotation / 1000;
 
 }
 
 </script>
+
+<script src="frg-file-reader-generic.js" ></script>
+
 </body>
 </html>

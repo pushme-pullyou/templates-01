@@ -54,6 +54,8 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
 
+<script src="gbxp-gbxml-parser.js"></script>
+
 <nav id="navMenu">
 
 	<header id="hdrTitle">
@@ -78,15 +80,12 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 		<button onclick="addMeshes()">add meshes</button>
 	</p>
 
-
 	<p>
-		<button onclick=controls.reset() >reset view</button>
 		<button onclick="sceneRotation = sceneRotation === 1 ? 0 : 1;">rotation</button>
 	</p>
 
 	<p>
-		<output id=outSpeed>50</output>
-		<input type="range" id="inpSpeed" onclick="sceneRotation=0.05 * this.value;outSpeed.innerHTML=this.value;" />
+		<input type="range" id="inpSpeed" onclick="sceneRotation=0.03 * this.value;" />
 	</p>
 
 	<div id="divLog"></div>
@@ -95,7 +94,18 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 
 <script>
 
-aSource.href = "https://github.com/zzzzz/xxxxx.html";
+
+//urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/zip/bilt-2019-template.zip";
+urlDefaultFile = "https://www.ladybug.tools/spider/gbxml-sample-files/bristol-clifton-downs-fixed.xml";
+//urlDefaultFile = "https://www.ladybug.tools/spider/gbxml-sample-files/bristol-clifton-down-road-utf16.xml";
+
+// urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/zip/warwick-university-5k-surfaces.zip";
+//urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/annapolis-md-single-family-residential-2016.xml"
+//urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/zip/pittsburg-airport.zip";
+//urlDefaultFile = "https://cdn.jsdelivr.net/gh/GreenBuildingXML/Sample-gbXML-Files@master/gbXML_TRK.xml";
+//urlDefaultFile = "https://www.ladybug.tools/spider/gbxml-sample-files/aspen-co-resort-retail.xml"
+
+aSource.href = "https://github.com/ladybug-tools/spider-gbxml-tools/tree/master/spider-gbxml-viewer/vx-2020-01-29/gbx-gbxml";
 imgIcon.src = "https://pushme-pullyou.github.io/github-mark-32.png";
 
 sTitle.innerHTML= document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
@@ -104,7 +114,7 @@ sVersion.innerHTML = version ? version.content : "";
 divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
 
 
-let mesh, meshGroup, axesHelper, lightDirectional, cameraHelper;
+let mesh, meshGroup, axesHelper, groundHelper, lightDirectional, cameraHelper;
 let sceneRotation = 1;
 let renderer, camera, controls, scene;
 
@@ -115,7 +125,7 @@ animate();
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 2000 );
 	camera.position.set( - 100, - 100, 100 );
 	camera.up.set( 0, 0, 1 );
 
@@ -133,7 +143,7 @@ function init() {
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
-	controls.maxDistance = 500;
+	controls.maxDistance = 5000;
 	controls.rotateSpeed = 2;
 	//controls.maxPolarAngle = Math.PI * 0.5;
 
@@ -150,59 +160,46 @@ function init() {
 
 	addGround();
 
-	addMesh();
+	//addMesh();
 
 	//addMeshes();
 
-	zoomObjectBoundingSphere( mesh );
+	requestFile( urlDefaultFile );
 
 
 }
 
 
-function addLights() {
+function requestFile( url ) {
 
-	scene.add( new THREE.AmbientLight( 0x404040 ) );
-	//scene.add( new THREE.AmbientLight( 0x666666 ) );
+	GBX.timeStart = performance.now();
 
-	const pointLight = new THREE.PointLight( 0xffffff, 0.1 );
-	pointLight.position.copy( camera.position );
-	camera.add( pointLight );
-
-	lightDirectional = new THREE.DirectionalLight( 0xdfebff, 0.5 );
-	lightDirectional.position.set( -50, -200, 100 );
-	lightDirectional.castShadow = true;
-	lightDirectional.shadow.mapSize.width = 1024;
-	lightDirectional.shadow.mapSize.height = 1024;
-
-	var d = 100;
-	lightDirectional.shadow.camera.left = - d;
-	lightDirectional.shadow.camera.right = d;
-	lightDirectional.shadow.camera.top = d;
-	lightDirectional.shadow.camera.bottom = - d;
-	lightDirectional.shadow.camera.far = 500;
-	scene.add( lightDirectional );
-
-	scene.add( new THREE.CameraHelper( lightDirectional.shadow.camera ) );
+	xhr = new XMLHttpRequest();
+	xhr.open( 'GET', url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr  );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = onLoad;
+	xhr.send( null );
 
 }
 
 
 
-function addGround() {
+function onLoad( xhr ) {
 
-	const geometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
-	const material = new THREE.MeshPhongMaterial( { color: 0xaaaaaa, depthWrite: false, side: 2 } );
-	const mesh = new THREE.Mesh( geometry, material );
-	mesh.position.z = -50;
-	mesh.receiveShadow = true;
-	scene.add( mesh );
+	const response = xhr.target.response;
+
+	//console.log( 'response', response );
+
+	GBX.parseResponse( response );
 
 }
 
 
 
-function zoomObjectBoundingSphere( obj = meshGroup ) {
+
+
+function zoomObjectBoundingSphere( obj = GBX.meshGroup ) {
 	//console.log( "obj", obj );
 
 	center = new THREE.Vector3( 0, 0, 0 );
@@ -221,7 +218,7 @@ function zoomObjectBoundingSphere( obj = meshGroup ) {
 	}
 
 	controls.target.copy( center ); // needed because model may be far from origin
-	controls.maxDistance = 50 * radius;
+	controls.maxDistance = 20 * radius;
 
 	delta = camera.position.clone().sub( controls.target ).normalize();
 	//console.log( 'delta', delta );
@@ -231,7 +228,7 @@ function zoomObjectBoundingSphere( obj = meshGroup ) {
 
 	distance = controls.target.distanceTo( camera.position );
 
-	//camera.zoom = distance / (  * radius ) ;
+	//camera.zoom = distance / ( 2 * radius ) ;
 
 	camera.position.copy( center.clone().add( new THREE.Vector3( -2 * radius, 2 * radius, 1.0 * radius ) ) );
 	camera.near = 0.001 * radius; //2 * camera.position.length();
@@ -240,12 +237,16 @@ function zoomObjectBoundingSphere( obj = meshGroup ) {
 
 	axesHelper.position.copy( center );
 
+	groundHelper.position.copy( center );
+	groundHelper.position.z = 19
+
 	if ( lightDirectional ) {
 
-		lightDirectional.position.copy( center.clone().add( new THREE.Vector3( -1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
-		lightDirectional.shadow.camera.scale.set( 0.02 * radius, 0.02 * radius, 0.2 * radius );
+		lightDirectional.position.copy( center.clone().add(
+			new THREE.Vector3( - 1.5 * radius, 1.5 * radius, 1.5 * radius ) ) );
+		lightDirectional.shadow.camera.scale.set( 0.2 * radius, 0.2 * radius, 0.01 * radius );
 
-		//targetObject.position.copy( center );
+		lightDirectional.target = axesHelper
 
 		scene.remove( cameraHelper );
 		cameraHelper = new THREE.CameraHelper( lightDirectional.shadow.camera );
@@ -263,6 +264,50 @@ function zoomObjectBoundingSphere( obj = meshGroup ) {
 	window.dispatchEvent( event );
 
 };
+
+
+
+
+function addLights() {
+
+	//scene.add( new THREE.AmbientLight( 0x404040 ) );
+	scene.add( new THREE.AmbientLight( 0x666666 ) );
+
+	const pointLight = new THREE.PointLight( 0xffffff, 0.5);
+	pointLight.position.copy( camera.position );
+	camera.add( pointLight );
+
+	lightDirectional = new THREE.DirectionalLight( 0xffffff, 1 );
+	lightDirectional.position.set( -50, -200, 100 );
+	lightDirectional.castShadow = true;
+	lightDirectional.shadow.mapSize.width = 1024;
+	lightDirectional.shadow.mapSize.height = 1024;
+
+	var d = 10;
+	lightDirectional.shadow.camera.left = - d;
+	lightDirectional.shadow.camera.right = d;
+	lightDirectional.shadow.camera.top = d;
+	lightDirectional.shadow.camera.bottom = - d;
+	lightDirectional.shadow.camera.far = 500;
+	scene.add( lightDirectional );
+
+	//scene.add( new THREE.CameraHelper( lightDirectional.shadow.camera ) );
+
+}
+
+
+
+function addGround() {
+
+	const geometry = new THREE.PlaneBufferGeometry( 2000, 2000 );
+	const material = new THREE.MeshPhongMaterial( { color: 0xaaaaaa, opacity:0.85, side: 2, transparent: true } );
+	groundHelper = new THREE.Mesh( geometry, material );
+	groundHelper.position.z = 23;
+	groundHelper.receiveShadow = true;
+	scene.add( groundHelper );
+
+}
+
 
 function addMesh( size = 20 ) {
 
@@ -304,8 +349,6 @@ function addMeshes( count = 100 ) {
 
 	scene.add( meshGroup );
 
-	zoomObjectBoundingSphere( meshGroup )
-
 }
 
 
@@ -330,7 +373,7 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
-	mesh.rotation.z += sceneRotation / 1000;
+	//scene.rotation.z += sceneRotation / 1000;
 
 }
 
