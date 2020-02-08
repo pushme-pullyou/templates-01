@@ -17,6 +17,8 @@ divDescription.innerHTML = document.head.querySelector( "[ name=description ]" )
 THR.init();
 THR.animate();
 
+const FO = {};
+
 
 init();
 
@@ -29,10 +31,9 @@ function init() {
 
 	}
 
-	window.addEventListener( "onloadFile", onLoad, false );
+	//window.addEventListener( "onloadFile", onLoad, false );
 
 	//location.hash = FOH.urlDefaultFile;
-
 
 }
 
@@ -47,6 +48,5 @@ function toggleNavMenu () {
 
 function onLoad() {
 
-	GBX.parseResponse( FO.data );
 
-}
+};

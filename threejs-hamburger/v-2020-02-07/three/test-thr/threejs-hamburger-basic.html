@@ -8,9 +8,11 @@
 <meta name=description
 	content="View models in 3D in your browser using the WebGL and the Three.js JavaScript library">
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-<meta name=version content="2020-02-07">
+<meta name=version content="2020-01-31">
 
 <title></title>
+
+<base href="../../">
 
 <link href="assets/style-2020-01-17.css" rel="stylesheet">
 
@@ -28,6 +30,7 @@
 
 <script src="three/thr-three-2020-01-21.js"></script>
 <script src="three/thra-three-add-2020-01-21.js"></script>
+
 
 
 	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
@@ -61,8 +64,6 @@
 			<div id=FRGdivFileReaderGeneric ></div>
 
 			<div id="FOZdivFileOpenZip" ></div>
-
-			<div id="FOHdivFileOpenHash" ></div>
 
 			<div id=GFLdivGetFiles></div>
 
@@ -121,28 +122,45 @@
 	-->
 <script src="three/thrv-three-view-2020-01-21.js"></script>
 
-
-<script src="scene/ground/v-2020-01-23/tsg-three-scene-ground.js"></script>
-<script src="scene/fog/v-2020-01-23/tsf-three-scene-fog.js"></script>
+<!--
+	<script src="scene/ground/v-2020-01-23/tsg-three-scene-ground.js"></script>
+	<script src="scene/fog/v-2020-01-23/tsf-three-scene-fog.js"></script>
+-->
 
 <script src="browse-files/file-reader-generic/v-2020-01-27/frg-file-reader-generic.js"></script>
 <script src="browse-files/file-open-zip/v-2020-01-27/foz-file-open-zip.js"></script>
-<script src="browse-files/foh-file-open-hash/v-2020-02-06/foh-file-open-hash.js"></script>
-<script src="browse-files/gff-github-folder-files/v-2020-02-06/gff-github-folder-files.js"></script>
+<script src="browse-files/gff-github-folder-files-2020-01-31/gff-github-folder-files-01.js"></script>
 
-<script src="gbx-gbxml/v-2020-02-04/gbxp-gbxml-parser.js"></script>
+<script src="gbx-gbxml-2020-02-01/gbxp-gbxml-parser.js"></script>
+<!--
 
 <script src="settings/shm-settings-html-testing.js"></script>
 <script src=settings/theme/v-2020-01-17/stm-settings-theme-menu.js></script>
 <script src=settings/theme-dropin/v-2020-01-17/stmd-settings-theme-menu-dropin.js></script>
 
-<!--
 	<script src="browse-files/gfl-github-file-list-2020-01-10-00.js"></script>
 	<script src="json-view/jtv-json-tree-view-2020-01-10-00.js"></script>
 	<script src="json-view/jte-json-tree-edit-2020-01-09-00.js"></script>
 	<script src="parse/phj-parse-honeybee-json-2020-01-10.js"></script>
 -->
+<script>
 
+THR.onLoad = function ( event ) {
+
+//console.log( 'event thr', event );
+
+THRA.onLoad();
+
+//TSG.onLoad();
+
+//TSF.onLoad();
+
+//THRV.zoomToFitObject();
+
+};
+
+
+</script>
 <script src=main.js ></script>
 
 </body>

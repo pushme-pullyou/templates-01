@@ -10,6 +10,8 @@ const FOH = {};
 
 FOH.urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/bristol-clifton-downs-broken.xml";
 
+FOH.urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/dragonfly-schema@master/samples/building_simple.json";
+
 FOH.xhr = new XMLHttpRequest(); // declare now to load event listeners in other modules
 
 FOH.regexImages = /\.(jpe?g|png|gif|webp|ico|svg|bmp)$/i;
@@ -61,7 +63,7 @@ FOH.onHashChange = function() {
 	//console.log( 'FOH.urlDefaultFile', FOH.urlDefaultFile );
 	//console.log( 'location.hash', location.hash );
 
-	const url = !location.hash ? FOH.urlDefaultFile : location.hash.slice( 1 );
+	url = !location.hash ? FOH.urlDefaultFile : location.hash.slice( 1 );
 
 	FOH.requestFileDecider( url );
 
@@ -186,5 +188,24 @@ FOH.callbackXml = function( text ) {
 
 };
 
+
+FOH.callbackJson = function( text ) {
+
+	FOH.onProgress( text.length, "load complete" );
+
+	FOH.text = text;
+
+	FO.url = location.hash.slice( 1 );
+
+	FO.data = text;
+
+	FOH.event = new Event( "onloadJson", {"bubbles": true, "cancelable": false, detail: true } );
+
+	//window.addEventListener( 'onloadFile', () => { console.log( '', text ) }, false );
+
+	window.dispatchEvent( FOH.event );
+
+
+};
 
 FOH.init();

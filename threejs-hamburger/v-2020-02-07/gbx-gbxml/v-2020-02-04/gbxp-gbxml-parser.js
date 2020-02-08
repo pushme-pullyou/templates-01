@@ -1,3 +1,9 @@
+// copyright 2020 Theo Armour. MIT license.
+// See pushme-pullyou/templates-01/modules/template
+// 2020-02-07
+/* divContent */
+// jshint esversion: 6
+// jshint loopfunc: true
 
 const GBX = {};
 
@@ -26,7 +32,55 @@ GBX.colors = Object.assign( {}, GBX.colorsDefault ); // create working copy of d
 GBX.surfaceTypes = Object.keys( GBX.colors );
 
 
+GBX.init = function () {
+
+	window.addEventListener( "onloadFile", GBX.onLoad, false );
+
+	GBXPdivGbxmlParser.innerHTML = GBX.getMenu();
+
+};
+
+
+
+GBX.getMenu = function () {
+
+	const htm = `
+<details id=GBXdet hidden>
+
+	<summary>
+	
+		gbXML parser
+
+		<span class="couponcode">?? <span class="coupontooltip">gbZML parser statistics</span></span>
+
+	</summary>
+
+	<div id=GBXdivStats ></div>
+
+</details>`;
+
+	return htm;
+
+};
+
+
+
 //THR.group = new THREE.Group();
+
+GBX.onLoad = function () {
+
+	if ( FO.url.toLowerCase().endsWith( ".xml" ) ) {
+
+		GBX.parseResponse( FO.data );
+
+		GBXdet.hidden = false;
+
+	}
+
+};
+
+
+
 
 GBX.parseResponse = function ( response ) {
 
@@ -50,15 +104,20 @@ GBX.addMeshes = function ( meshes ) {
 	THR.scene.remove( THR.group );
 
 	THR.group = new THREE.Group();
-	THR.group.name = 'THR.group';
 	THR.group.add( ...meshes );
-
+	THR.group.name = 'THR.group';
 	THR.scene.add( THR.group );
 
-	//console.log( '', ( performance.now() - GBX.timeStart ).toLocaleString() );
+	console.log( '', ( performance.now() - GBX.timeStart ).toLocaleString() );
 
 	THRV.zoomToFitObject();
 
+	const htm = `
+surfaces: ${ THR.group.children.length }</br>
+time to parse: ${ ( performance.now() - GBX.timeStart ).toLocaleString() }<br>
+`;
+
+	GBXdivStats.innerHTML = htm;
 
 };
 
@@ -268,3 +327,6 @@ GBX.getTempVertices = function ( vertices ) {
 	return tempVertices;
 
 };
+
+
+GBX.init();

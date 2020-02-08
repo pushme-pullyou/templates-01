@@ -14,6 +14,7 @@ GFF.items = [
 		"user": "GreenBuildingXML",
 		"repo": "/Sample-gbXML-Files",
 		"pathRepo": "",
+		"type": ".xml",
 		"title": "gbXML.org sample files",
 		"subTitle":
 			`Files from the
@@ -25,6 +26,7 @@ GFF.items = [
 		"user": "ladybug-tools",
 		"repo": "/spider",
 		"pathRepo": "gbxml-sample-files/",
+		"type": ".xml",
 		"title": "Spider gbXML files",
 		"subTitle":
 			`Ladybug Tools / Spider
@@ -35,6 +37,7 @@ GFF.items = [
 		"user": "ladybug-tools",
 		"repo": "/spider",
 		"pathRepo": "gbxml-sample-files/samples-2/",
+		"type": ".xml",
 		"title": "Spider gbXML files #2",
 		"subTitle":
 			`Ladybug Tools / Spider gbXML Viewer
@@ -45,7 +48,8 @@ GFF.items = [
 		"user": "ladybug-tools",
 		"repo": "/spider",
 		"pathRepo": "cookbook/07-create-exportable-buildings/test-gbxml-files/",
-		"title": "Build Well",
+		"type": ".xml",
+		"title": "Build Well gbXML",
 		"subTitle":
 			`Parametrically created gbXML files from the Spider
 		<a href="https://www.ladybug.tools/spider/#build-well/README.md" target="_blank">Build Well</a>
@@ -57,11 +61,45 @@ GFF.items = [
 		"user": "ladybug-tools",
 		"repo": "/spider",
 		"pathRepo": "gbxml-sample-files/zip/",
+		"type": ".zip",
 		"title": "Spider gbXML ZIP files",
 		"subTitle":
 			`Ladybug Tools / Spider gbXML
 		<a href="https://www.ladybug.tools/spider/#gbxml-sample-files/README.md" target="_blank">sample gbXML data in ZIP files</a>
 	 	on GitHub from a variety of sources`
+	},
+	{
+		"user": "ladybug-tools",
+		"repo": "/honeybee-schema",
+		"pathRepo": "samples/",
+		"type": ".json",
+		"title": "Honeybee Schema JSON",
+		"subTitle":
+			`Ladybug Tools / Honeybee Schema
+		<a href="https://www.ladybug.tools/honeybee-schema/#README.md" target="_blank">sample data JSON files</a>
+	 	on GitHub`
+	},
+	{
+		"user": "ladybug-tools",
+		"repo": "/spider",
+		"pathRepo": "sandbox/honeybee-schema-builder/honeybee-json-schema-sample-files-by-javascipt/",
+		"type": ".json",
+		"title": "Honeybee Builder JSON",
+		"subTitle":
+			`Ladybug Tools / Honeybee Builder
+		<a href="https://www.ladybug.tools/spider/#README.md" target="_blank">sample data JSON files</a>
+	 	on GitHub`
+	},
+	{
+		"user": "ladybug-tools",
+		"repo": "/dragonfly-schema",
+		"pathRepo": "samples/",
+		"type": ".json",
+		"title": "Dragonfly Schema JSON",
+		"subTitle":
+			`Ladybug Tools / Dragonfly Schem
+		<a href="https://www.ladybug.tools/dragonfly-schema/#README.md" target="_blank">sample data JSON files</a>
+	 	on GitHub`
 	}
 ];
 
@@ -82,13 +120,13 @@ GFF.getMenu = function () {
 
 	<summary>
 
-		gbXML sample files
+		Sample files
 
 		<span class="couponcode">?? <span class="coupontooltip">aaa bbb ccc 123 456</span></span>
 
 	</summary>
 
-	<p>gbXML files you can load, view and experiment with</p>
+	<p>SampleL files you can load, view and experiment with</p>
 
 	<div id=GFFdivMenuItems ></div>
 
@@ -126,7 +164,6 @@ GFF.getGithubFolderFiles = function ( index ) {
 	const item = GFF.items[ index ];
 
 	item.urlGitHubApiContents = 'https://api.github.com/repos/' + item.user + item.repo + '/contents/' + item.pathRepo;
-
 
 	GFF.index = index;
 
@@ -207,8 +244,7 @@ GFF.callbackGitHubMenu = function ( xhr ) {
 
 	for ( let file of files ) {
 
-		if ( file.name.toLowerCase().endsWith( '.xml' ) === false &&
-			file.name.toLowerCase().endsWith( '.zip' ) === false ) { continue; }
+		if ( file.name.toLowerCase().endsWith( item.type ) === false ) { continue; }
 
 		const fileName = encodeURI( file.name );
 
