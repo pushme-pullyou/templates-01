@@ -8,26 +8,29 @@
 <meta name=description
 	content="View models in 3D in your browser using the WebGL and the Three.js JavaScript library">
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-<meta name=version content="2020-02-07">
+<meta name=version content="2020-02-17">
 
 <title></title>
 
-<link href="assets/style-2020-01-17.css" rel="stylesheet">
+<base href="../../../" >
 
-<style>
+<link href="assets/style-2020-02-17.css" rel="stylesheet" >
 
-</style>
 </head>
 
 <body style=margin:0;overflow:hidden; >
 
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r113/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r113/examples/js/controls/OrbitControls.js"></script>
 
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" ></script>
 
-<script src="three/thr-three-2020-01-21.js"></script>
-<script src="three/thra-three-add-2020-01-21.js"></script>
+<script src="three/thr-three/v-2020-02-17/thr-three.js"></script>
+
+<script src="three/thra-three-add/v-2020-02-17/thra-three-add.js"></script>
+
+<!--
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" ></script>
+-->
 
 
 
@@ -63,14 +66,11 @@
 
 			<div id="FOZdivFileOpenZip" ></div>
 
-			<div id="FOHdivFileOpenHash" ></div>
-
 			<div id=GFLdivGetFiles></div>
 
 			<div id=GFFdivGithubFolderFiles ></div>
 
-			<div id="GBXPdivGbxmlParser" ></div>
-
+			<div id=GBXPdivGbxmlParser ></div>
 
 			<div id=JTVdivJsonTreeView ></div>
 
@@ -82,7 +82,6 @@
 		<details open>
 
 			<summary class=sumMenuTitle>Settings</summary>
-
 
 			<div id=TSGdivThreeSceneGround ></div>
 
@@ -119,39 +118,76 @@
 
 	</div>
 
-	<!--
 
-		<script src="three/thrt-three-toggles-2020-01-21-01.js"></script>
-	-->
+<script src="three/thrg-three-ground/v-2020-02-17/thrg-three-ground.js"></script>
 
+<!--
 
 <script src="three/thrv-three-view-2020-01-21.js"></script>
-
-
-<script src="scene/ground/v-2020-01-23/tsg-three-scene-ground.js"></script>
 <script src="scene/fog/v-2020-01-23/tsf-three-scene-fog.js"></script>
-<script src=main.js ></script>
+
 
 <script src="browse-files/file-reader-generic/v-2020-01-27/frg-file-reader-generic.js"></script>
 <script src="browse-files/file-open-zip/v-2020-01-27/foz-file-open-zip.js"></script>
-<script src="browse-files/foh-file-open-hash/v-2020-02-06/foh-file-open-hash.js"></script>
 <script src="browse-files/gff-github-folder-files/v-2020-02-07/gff-github-folder-files.js"></script>
 
 <script src="gbx-gbxml/v-2020-02-17/gbxp-gbxml-parser.js"></script>
-<script src="parse/pjh-parse-json-honeybee/v-2020-02-07/pjh-parse-json-honeybee.js"></script>
-<script src="parse/pjd-parse-json-dragonfly/v-2020-02-07/pjd-parse-json-dragonfly.js"></script>
-<script src="parse/jtv-json-tree-view/v-2020-02-07/jtv-json-tree-view.js"></script>
 
 <script src="settings/shm-settings-html-testing.js"></script>
 <script src=settings/theme/v-2020-01-17/stm-settings-theme-menu.js></script>
 <script src=settings/theme-dropin/v-2020-01-17/stmd-settings-theme-menu-dropin.js></script>
 
-<!--
-	<script src="browse-files/gfl-github-file-list-2020-01-10-00.js"></script>
-	<script src="json-view/jte-json-tree-edit-2020-01-09-00.js"></script>
-	<script src="parse/phj-parse-honeybee-json-2020-01-10.js"></script>
+<script src="browse-files/gfl-github-file-list-2020-01-10-00.js"></script>
+<script src="json-view/jtv-json-tree-view-2020-01-10-00.js"></script>
+<script src="json-view/jte-json-tree-edit-2020-01-09-00.js"></script>
+<script src="parse/phj-parse-honeybee-json-2020-01-10.js"></script>
 -->
+<script>
 
+THR.onLoad = function ( event ) {
+
+	//console.log( 'event thr', event );
+
+	addMesh()
+
+	//THRA.onLoad();
+
+	//TSG.onLoad();
+
+	//TSF.onLoad();
+
+	//THRV.zoomToFitObject();
+
+};
+
+
+
+function addMesh( size = 20 ) {
+
+	// CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded )
+	// SphereGeometry( radius, segmentsWidth, segmentsHeight, phiStart, phiLength, thetaStart, thetaLength )
+	// TorusGeometry( radius, tube, radialSegments, tubularSegments, arc )
+
+	const geometry = new THREE.BoxGeometry( size, size, size );
+
+	geometry.applyMatrix4( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+	geometry.applyMatrix4( new THREE.Matrix4().makeScale( 1, 1, 1 ) );
+	geometry.applyMatrix4( new THREE.Matrix4().makeTranslation( 0, 0, 0 ) );
+
+	const material = new THREE.MeshNormalMaterial();
+	//const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), specular: 0xffffff } );
+	mesh = new THREE.Mesh( geometry, material );
+	// mesh.receiveShadow = true;
+	// mesh.castShadow = true;
+	THR.scene.add( mesh );
+
+	return mesh;
+
+}
+
+</script>
+
+<script src=main.js ></script>
 
 </body>
 </html>

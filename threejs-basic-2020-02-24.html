@@ -7,7 +7,7 @@
 <meta name=description
 	content="Real-time interactive 3D graphics in your browser using the WebGL and the Three.js JavaScript library">
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-<!-- <meta name=version content="2020-01-08">-->
+<meta name=version content="2020-02-24">-->
 
 
 <title></title>
@@ -51,8 +51,8 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 </head>
 
 <body>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r113/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r113/examples/js/controls/TrackballControls.js"></script>
 
 <nav id="navMenu">
 
@@ -104,7 +104,7 @@ sVersion.innerHTML = version ? version.content : "";
 divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
 
 
-let mesh, meshGroup, axesHelper, lightDirectional, cameraHelper;
+let mesh, group, axesHelper, lightDirectional, cameraHelper;
 let sceneRotation = 1;
 let renderer, camera, controls, scene;
 
@@ -150,11 +150,11 @@ function init() {
 
 	addGround();
 
-	addMesh();
+	//addMesh();
 
-	//addMeshes();
+	addMeshes();
 
-	zoomObjectBoundingSphere( mesh );
+	zoomObjectBoundingSphere();
 
 
 }
@@ -164,14 +164,14 @@ function init() {
 
 function addLights() {
 
-	scene.add( new THREE.AmbientLight( 0x404040 ) );
-	//scene.add( new THREE.AmbientLight( 0x666666 ) );
+	//scene.add( new THREE.AmbientLight( 0x404040 ) );
+	scene.add( new THREE.AmbientLight( 0x666666 ) );
 
-	const pointLight = new THREE.PointLight( 0xffffff, 0.1 );
+	const pointLight = new THREE.PointLight( 0xffffff, 0.2 );
 	pointLight.position.copy( camera.position );
 	camera.add( pointLight );
 
-	lightDirectional = new THREE.DirectionalLight( 0xdfebff, 0.5 );
+	lightDirectional = new THREE.DirectionalLight( 0xdffffff, 0.5 );
 	lightDirectional.position.set( -50, -200, 100 );
 	lightDirectional.castShadow = true;
 	lightDirectional.shadow.mapSize.width = 1024;
@@ -204,7 +204,7 @@ function addGround() {
 
 
 
-function zoomObjectBoundingSphere( obj = meshGroup ) {
+function zoomObjectBoundingSphere( obj = group ) {
 	//console.log( "obj", obj );
 
 	center = new THREE.Vector3( 0, 0, 0 );
@@ -276,9 +276,9 @@ function addMesh( size = 20 ) {
 
 	const geometry = new THREE.BoxGeometry( size, size, size );
 
-	geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
-	geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 ) );
-	geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0, 0 ) );
+	geometry.applyMatrix4( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
+	geometry.applyMatrix4( new THREE.Matrix4().makeScale( 1, 1, 1 ) );
+	geometry.applyMatrix4( new THREE.Matrix4().makeTranslation( 0, 0, 0 ) );
 
 	//const material = new THREE.MeshNormalMaterial();
 	const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), specular: 0xffffff } );
@@ -295,20 +295,20 @@ function addMesh( size = 20 ) {
 
 function addMeshes( count = 100 ) {
 
-	scene.remove( meshGroup );
+	scene.remove( group );
 
-	meshGroup = new THREE.Group();
+	group = new THREE.Group();
 
-	for ( let i = 0; i < count; i++ ) { meshGroup.add( addMesh() ) };
+	for ( let i = 0; i < count; i++ ) { group.add( addMesh() ) };
 
-	meshGroup.children.forEach( mesh => {
+	group.children.forEach( mesh => {
 		mesh.position.set( Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50 )
 		mesh.rotation.set( 0.2 * Math.random(), 0.2 * Math.random(), 0.2 * Math.random() )
 	} );
 
-	scene.add( meshGroup );
+	scene.add( group );
 
-	zoomObjectBoundingSphere( meshGroup )
+	zoomObjectBoundingSphere( group )
 
 }
 
@@ -334,7 +334,7 @@ function animate() {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
 	controls.update();
-	mesh.rotation.z += sceneRotation / 1000;
+	group.rotation.z += sceneRotation / 1000;
 
 }
 

@@ -1,6 +1,6 @@
 // copyright 2020 Theo Armour. MIT license.
 // See pushme-pullyou/templates-01/modules/template
-// 2020-01-15
+// 2020-02-13
 /* divContent */
 // jshint esversion: 6
 // jshint loopfunc: true
@@ -26,7 +26,7 @@ TMP.getMenu = function () {
 	<summary>
 		Template
 
-		<span class="couponcode">??? <span class="coupontooltip">aaa bbb ccc 123 456</span></span>
+		<span class="couponcode">??<span class="coupontooltip">aaa bbb ccc 123 456</span></span>
 
 	</summary>
 

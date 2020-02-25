@@ -5,7 +5,7 @@
 // jshint esversion: 6
 // jshint loopfunc: true
 
-
+const FO = {};
 const FOH = {};
 
 FOH.urlDefaultFile = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/bristol-clifton-downs-broken.xml";
@@ -22,7 +22,7 @@ FOH.init = function () {
 
 	window.addEventListener ( 'hashchange', FOH.onHashChange, false );
 
-	FOHdivFileOpenHash.innerHTML += FOH.getMenu();
+	FOHdivFileOpenHash.innerHTML = FOH.getMenu();
 
 };
 
@@ -33,7 +33,7 @@ FOH.getMenu = function () {
 	const htm = `
 <details>
 
-	<summary>
+	<summary class="sumMenuSecondary">
 
 		File open hash
 
@@ -116,6 +116,7 @@ FOH.requestFileText = function( url ) {
 	FOH.xhr.send( null );
 
 };
+
 
 
 FOH.onProgress = function( size = 0, note = '' ) {

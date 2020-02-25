@@ -8,11 +8,11 @@
 <meta name=description
 	content="View models in 3D in your browser using the WebGL and the Three.js JavaScript library">
 <meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-<meta name=version content="2020-02-07">
+<meta name=version content="2020-02-17">
 
 <title></title>
 
-<link href="assets/style-2020-01-17.css" rel="stylesheet">
+<link href="assets/style-2020-02-17.css" rel="stylesheet">
 
 <style>
 
@@ -21,14 +21,13 @@
 
 <body style=margin:0;overflow:hidden; >
 
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r112/examples/js/controls/TrackballControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r113/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r113/examples/js/controls/OrbitControls.js"></script>
 
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" ></script>
 
-<script src="three/thr-three-2020-01-21.js"></script>
-<script src="three/thra-three-add-2020-01-21.js"></script>
-
+<script src="three/thr-three/v-2020-02-17/thr-three.js"></script>
+<script src="three/thra-three-add/v-2020-02-17/thra-three-add.js"></script>
 
 
 	<button id="expandButton" onclick="toggleNavMenu();">☰</button>
@@ -57,19 +56,21 @@
 
 		<details open>
 
-			<summary class=sumMenuTitle>Browse files</summary>
+			<summary class=sumMenuTitle >Browse files</summary>
 
 			<div id=FRGdivFileReaderGeneric ></div>
 
-			<div id="FOZdivFileOpenZip" ></div>
-
-			<div id="FOHdivFileOpenHash" ></div>
 
 			<div id=GFLdivGetFiles></div>
 
 			<div id=GFFdivGithubFolderFiles ></div>
 
+
 			<div id="GBXPdivGbxmlParser" ></div>
+
+			<div id="FOZdivFileOpenZip" class=sumMenuSecondary ></div>
+
+			<div id="FOHdivFileOpenHash" class=sumMenuSecondary ></div>
 
 
 			<div id=JTVdivJsonTreeView ></div>
@@ -119,17 +120,12 @@
 
 	</div>
 
-	<!--
 
-		<script src="three/thrt-three-toggles-2020-01-21-01.js"></script>
-	-->
+<script src="three/thrv-three-view/v-2020-02-17/thrv-three-view.js"></script>
+<script src="three/thrg-three-ground/v-2020-02-17/thrg-three-ground.js"></script>
 
-
-<script src="three/thrv-three-view-2020-01-21.js"></script>
-
-
-<script src="scene/ground/v-2020-01-23/tsg-three-scene-ground.js"></script>
 <script src="scene/fog/v-2020-01-23/tsf-three-scene-fog.js"></script>
+
 <script src=main.js ></script>
 
 <script src="browse-files/file-reader-generic/v-2020-01-27/frg-file-reader-generic.js"></script>
