@@ -120,8 +120,7 @@ GBX.addMeshes = function ( meshes ) {
 
 	THR.gbx.position.x = - THR.bbox.min.x;
 	THR.gbx.position.y = - THR.bbox.min.y;
-	THR.gbx.position.z = - THR.bbox.min.z;
-
+	THR.gbx.position.z = THR.elevationDelta || 0;
 
 	THRV.zoomToFitObject();
 
@@ -137,6 +136,10 @@ time to parse: ${ ( performance.now() - GBX.timeStart ).toLocaleString() }<br>
 
 
 GBX.getElements = function () {
+
+	const reElevation = /<Elevation>(.*?)<\/Elevation>/i;
+	GBX.elevation = GBX.string.match( reElevation )[ 1 ];
+	//console.log( 'GBX.elevation', GBX.elevation );
 
 	const reSurface = /<Surface(.*?)<\/surface>/gi;
 	GBX.surfaces = GBX.string.match( reSurface );

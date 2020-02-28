@@ -121,7 +121,7 @@ FOO.testForObj = function () {
 
 	if ( location.hash.endsWith( ".obj" ) === false ) { return; }
 
-	console.log( 'hash', location.hash );
+	//console.log( 'hash', location.hash );
 
 	FOO.fileName = location.hash.split( "/" ).pop().slice( 0, -4 );
 	//console.log( 'FOO.fileName', FOO.fileName  );
@@ -131,7 +131,8 @@ FOO.testForObj = function () {
 	path = location.hash.slice( 1 ).split( "/" )
 	path.pop();
 	path = path.join( "/" ) + "/";
-	console.log( 'path', path );
+	//console.log( 'path', path );
+
 	FOO.loadObj( FOO.fileName, path );
 
 };
@@ -144,6 +145,7 @@ FOO.loadObj = function ( fName, path, params = {} ) {
 	THR.scene.add( THR.group );
 
 	//console.log( 'path', path );
+	//console.log( 'params', params );
 
 	new THREE.MTLLoader( FOO.manager )
 		.setPath( path )
@@ -156,8 +158,10 @@ FOO.loadObj = function ( fName, path, params = {} ) {
 				.setPath( path )
 				.load( fName + '.obj', function ( obj ) {
 
+
 					object = obj;
 					object.name = fName + ".obj";
+					object.folder =
 					object.position.set( + params.px || 0, +params.py || 0, +params.pz || 0 );
 					object.rotation.set( + params.rx || 0, +params.ry || 0, +params.rz || 0 );
 					object.scale.set( +params.sx || 1, +params.sy || 1, +params.sz || 1 );
@@ -165,7 +169,7 @@ FOO.loadObj = function ( fName, path, params = {} ) {
 					object.rotation.x = Math.PI / 2;
 					//object.rotation.y = 7 * Math.random();
 
-					object.scale.set( 3, 3, 3 );
+					//object.scale.set( 3, 3, 3 );
 					object.children[ 0 ].receiveShadow = true;
 					object.children[ 0 ].castShadow = true;
 
@@ -185,13 +189,14 @@ FOO.loadObj = function ( fName, path, params = {} ) {
 
 FOO.getObjectsData = function () {
 
+	const gbx = THR.group.getObjectByName( "gbx" );
+
 	const objText = FOO.objects.map( obj =>
-		`{ "url": "${ obj.name }", "px": "${ obj.position.x }", "py": "${ obj.position.y }", "pz": "${ obj.position.z }" }\n` )
-		.join( "" );
+		`{ "url": "${ obj.name }", "folder": "{ obj.folder }", "px": "${ obj.position.x }", "py": "${ obj.position.y }", "pz": "${ obj.position.z }", "rx": "${ obj.rotation.x }", "ry": "${ obj.rotation.y }", "rz": "${ obj.rotation.z }", "sx": "${ obj.scale.x }", "sy": "${ obj.scale.y }", "sz": "${ obj.scale.z }" }\n` ) .join( "" );
 
 		//
 	const txt = `
-	{ "url": "${ FO.url }" }
+{ "url": "${ gbx.userData.url }" }
 ${ objText }
 `;
 
@@ -261,9 +266,11 @@ FOO.getObjects = function () {
 
 		if ( line.url.startsWith( "http" ) ) {
 
-			console.log( 'line', line );
+			//console.log( 'line', line );
 
 			FO.url = line.url;
+
+			THR.elevationDelta = line.elevationDelta;
 
 			FOH.requestFileText( line.url );
 
@@ -279,6 +286,8 @@ FOO.getObjects = function () {
 
 	}
 
+	//const gbx = THR.group.getObjectByName( "gbx" );
+;
 };
 
 
@@ -311,7 +320,7 @@ FOO.addForest = function ( count = 100 ) {
 
 	//THRbbox = new THREE.Box3().setFromObject( THR.gbx );
 
-	console.log( 'bbox', bbox );
+	//console.log( 'bbox', bbox );
 
 	let x = 0;
 	let y = -30;
@@ -333,7 +342,7 @@ FOO.addForest = function ( count = 100 ) {
 
 		}
 
-		console.log( 'gg', bbox.containsPoint( new THREE.Vector3( x, y, 1 ) ) );
+		//console.log( 'gg', bbox.containsPoint( new THREE.Vector3( x, y, 1 ) ) );
 
 		if ( bbox.containsPoint( new THREE.Vector3( x, y, 1 ) ) ) {
 
@@ -341,12 +350,11 @@ FOO.addForest = function ( count = 100 ) {
 
 		}
 
-		line = { px: x, py: y, ry: 7 * Math.random() };
+		const line = { px: x, py: y, ry: 7 * Math.random(), "sx": 3 + Math.random(),  "sy": 3 + Math.random(), "sz": 3 + Math.random() };
 
 		FOO.loadObj( tree, FOO.path + "quaternius/ultimate-nature-pack/", line );
 
 	}
-
 
 };
 
