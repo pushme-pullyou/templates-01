@@ -27,6 +27,7 @@ _basic-html.html_
 	* You can also hotlink the themes via CDN at BootstrapCDN
 
 ### Code
+
 * Everything - HTML/CSS/JavaScript - in a single cookbook style file
 * A few hundred lines
 * Mobile first
