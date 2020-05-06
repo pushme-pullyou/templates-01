@@ -5,11 +5,14 @@
 <meta name = "viewport" content= "width=device-width, initial-scale=1" >
 <meta name = "description" content = "Basic TooToo HTML template" >
 <meta name = "keywords" content = "JavaScript,GitHub,FOSS" >
-<!-- <meta name=version content="2020-04-19">-->
+<!-- <meta name=version content="2020-05-05">-->
 
 <title></title>
 
 <style>
+
+/* Copyright 2020 Theo Armour. MIT License */
+
 
 * { box-sizing: border-box; }
 
@@ -48,7 +51,6 @@ summary { cursor: pointer; font-size: 2.5ch; font-weight: bold; }
 .infotooltip { border: 0.8ch double #888; background: white; display: none;
 	font: 100% monospace; font-size: 1rem; font-weight: normal; /* unset summary settings */
 	margin-left: -28ch; padding: 10px; position: absolute; z-index: 1000; }
-
 
 .sumMenuTitle { background-color: #ccc; color: #777; margin: 10px 0; text-align: center; } }
 
@@ -155,6 +157,17 @@ function setIt() {
 
 }
 
+
+function requestFile( url, callback ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.open( 'GET', url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr  );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = ( xhr ) => callback( xhr.target.response );
+	xhr.send( null );
+
+}
 </script>
 </body>
 </html>

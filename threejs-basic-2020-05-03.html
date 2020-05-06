@@ -32,15 +32,14 @@ input[ type=range ] { -webkit-appearance: none; -moz-appearance: none; backgroun
 input[ type=range ]::-moz-range-thumb { background-color: #888; border-radius: 2; width: 10px; }
 input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 18px; width: 10px; }
 
-.help { float: right; }
+.info { float: right }
 
-.couponcode { float: right }
+.info:hover>.infotooltip { display: block; }
 
-.couponcode:hover>.coupontooltip { display: block; }
-
-.coupontooltip { border: 0.8ch double #888; background: white; display: none;
+.infotooltip { border: 0.8ch double #888; background: white; display: none;
 	font: 100% monospace; font-size: 1rem; font-weight: normal; /* unset summary settings */
-	margin-left: -20ch; padding: 10px; position: absolute; z-index: 1000; }
+	margin-left: -28ch; padding: 10px; position: absolute; z-index: 1000; }
+
 
 #navMenu { margin: 0 20px; max-width: 15rem; position: absolute; }
 
@@ -49,12 +48,12 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 </head>
 
 <body>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r115/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r115/examples/js/controls/TrackballControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r116/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r116/examples/js/controls/TrackballControls.js"></script>
 
-<nav id="navMenu">
+<nav id="navMenu" >
 
-	<header id="hdrTitle">
+	<header id="hdrTitle" >
 
 		<h2>
 			<a id=aSource target=_top title="Source code on GitHub" >
@@ -66,7 +65,7 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 				<span id=sVersion ></span>
 			</a>
 
-			<span class="couponcode" >??<span id=divDescription class="coupontooltip" ></span></span>
+			<span class="info" >&#x24d8;<span id=divDescription class="infotooltip" ></span></span>
 
 		</h2>
 
@@ -86,6 +85,19 @@ input[ type=range ]::-webkit-slider-thumb { -webkit-appearance: none; background
 		<output id=outSpeed>50</output>
 		<input type="range" id="inpSpeed" onclick="sceneRotation=0.05 * this.value;outSpeed.innerHTML=this.value;" />
 	</p>
+
+	<p title="View the frames per second and memory used by this page"></p>
+		<a
+			href="javascript:( () => { const script=document.head.appendChild( document.createElement('script') ); script.onload=() => {const stats=new Stats();document.body.appendChild(stats.dom); requestAnimationFrame( function loop(){ stats.update(); requestAnimationFrame(loop) } ); } ; script.src='https://raw.githack.com/mrdoob/stats.js/master/build/stats.min.js'; })()">load
+			stats.js</a>
+	</p>
+
+	<p
+		title="View the number of objects that need rendering and the total number of triangles used to create the objects">
+		<button onclick="getRendererInfo()">getRendererInfo</button>
+	</p>
+
+	<div id="divInfo" class="navText"></div>
 
 	<div id="divLog"></div>
 
@@ -307,6 +319,33 @@ function addMeshes( count = 100 ) {
 	scene.add( group );
 
 	zoomObjectBoundingSphere( group )
+
+}
+
+
+
+function requestFile( url, callback ) {
+
+	xhr = new XMLHttpRequest();
+	xhr.open( 'GET', url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr  );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = ( xhr ) => callback( xhr.target.response );
+	xhr.send( null );
+
+}
+
+
+
+function getRendererInfo() {
+
+	const render = renderer.info.render;
+
+	divInfo.innerHTML = `
+	Renderer<br>
+	Calls: ${render.calls }<br>
+	Triangles: ${render.triangles.toLocaleString() }<br>
+	`;
 
 }
 
