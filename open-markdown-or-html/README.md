@@ -1,19 +1,20 @@
 
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/#tootoo13/0-templates/open-markdown-or-html/README.md "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html "View file as a web page." ) </span>
 
-<div><input type=button class = "btn btn-secondary btn-sm" onclick=window.location.href="https://github.com/pushme-pullyou/pushme-pullyou.github.io/blob/master/tootoo13/0-templates/open-markdown-or-html/README.md"
+<div><input type=button onclick=window.location.href="https://github.com/pushme-pullyou/templates-01/tree/master/open-markdown-or-html"
 value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
 
-<br>
 
-# [open-markdown-or-html Read Me]( #README.md )
+# [open-markdown-or-html Read Me]( ./readme.html )
 
-<!--
-<iframe src=https://pushme-pullyou.github.io/tootoo13/0-templates/open-markdown-or-html/open-markdown-or-html-r1.html width=100% height=500px >Iframes are not viewable in GitHub source code views</iframe>
+<div style="height:50ch;overflow:hidden;resize:both;width:100%;" title="Resize me">
+<iframe src=https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html width=100% height=100% >Iframes are not viewable in GitHub source code views</iframe></div>
 _<small>open-markdown-or-html</small>_
 
-## Full Screen: [open-markdown-or-html]( https://pushme-pullyou.github.io/tootoo13/0-templates/open-markdown-or-html/open-markdown-or-html-r1.html )
--->
+## Full Screen: [open-markdown-or-html]( https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html )
+
+## [markdown-help.md]( #../assets/markdown-help.md )
+## [assets/style.css]( #../assets/style.css )
 
 
 ## Concept
@@ -22,7 +23,7 @@ File wrangler.
 
 Default index.html file. Opens HTML or Markdown files. Passes location.hash.
 
-Use showdown.js to convert markdown to HTML
+Uses [showdown.js]( https://github.com/showdownjs/showdown ) to convert markdown to HTML
 
 ## To Do / Wish List
 
@@ -30,21 +31,20 @@ Use showdown.js to convert markdown to HTML
 ## Issues
 
 
-## Things you can do using this script
-
-* Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
-* Click the Octocat icon to view or edit the source code on GitHub
-* Click on title to reload
-* Press Control-U/Command-Option-U to view the source code
-* Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
-
 
 ## Links of Interest
 
 
 ## Change Log
 
-### 2019-11-21 ~
+### 2020-05-31 ~ Theo
+
+* Cleanup
+* Enhance read me files
+* link to md help
+
+
+### 2019-11-21 ~ Theo
 
 omoh v 0.01.01
 
@@ -59,5 +59,5 @@ omoh v 0.01.01
 
 ***
 
-# <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
+# <center title="hello! go tpo top" ><a href=javascript:window.scrollTo(0,0); > ❦ </a></center>
 
