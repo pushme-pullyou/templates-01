@@ -16,6 +16,12 @@ _<small>open-markdown-or-html</small>_
 ## [markdown-help.md]( #../assets/markdown-help.md )
 ## [assets/style.css]( #../assets/style.css )
 
+tests
+
+<a>thing</a>
+
+<img height=10 width=1000 style="border: 1px solid red" >
+
 
 ## Concept
 

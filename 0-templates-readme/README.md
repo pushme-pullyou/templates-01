@@ -1,57 +1,63 @@
 
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/templates-01/0-templates-readme/ "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html "View file as a web page." ) </span>
 
-<div><input type=button class = 'btn btn-secondary btn-sm' onclick=window.location.href="https://github.com/pushme-pullyou/pushme-pullyou.github.io/blob/master/templates-01/0-templates-readme/";
-value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
+<div><input type=button onclick=window.location.href="https://github.com/pushme-pullyou/templates-01/tree/master/open-markdown-or-html"
+value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
 
-<br>
 
-# [TooToo - 0 - Template Read Me]( #tootoo-templates/0-templates-readme/README.md )
+# [open-markdown-or-html Read Me]( ./readme.html )
 
-<!--
-<iframe src=https://pushme-pullyou.github.io/tootoo-templates/basic-html.html width=100% height=500px >Iframes are not viewable in GitHub source code views</iframe>
+<div style="height:50ch;overflow:hidden;resize:both;width:100%;" title="Resize me">
+<iframe src=https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html width=100% height=100% >Iframes are not viewable in GitHub source code views</iframe></div>
+_<small>open-markdown-or-html</small>_
 
-## Full Screen: [ZZZZZ]( https://pushme-pullyou.github.io/index.html )
--->
+## Full Screen: [open-markdown-or-html]( https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html )
+
+## [markdown-help.md]( #../assets/markdown-help.md )
+## [assets/style.css]( #../assets/style.css )
 
 
 ## Concept
 
-* The files in this folder are templates or demos or 'boilerplate' files that may be used to build gbXML viewer modules.
+File wrangler.
 
-### [README-template.md]( #tootoo-templates/0-templates-readme/README-template.md )
+Default index.html file. Opens HTML or Markdown files. Passes location.hash.
 
-* A template for starting your own read me files
+Uses [showdown.js]( https://github.com/showdownjs/showdown ) to convert markdown to HTML
 
-### [index.html]( #tootoo-templates/0-templates-readme/index.html )
+## To Do / Wish List
 
-* Goal: drop this anywhere in any folder it will call the top level index.html and add the local read me file path as location hash
-* Works locally and in GitHub Pages
-
-## To do / Wish list
-
-* 2018-08-03 ~ Theo ~ update html files to template literals
-* 2018-08-03 ~ Theo ! create a default file name as a const at top of file
 
 ## Issues
 
 
-## Links of interest
 
-* https://github.com/readmeTips/readmeTips.github.io
-
-
-## Change log
+## Links of Interest
 
 
-### 2018-12-31 ~ Theo
+## Change Log
 
-* Fix some links
+### 2020-05-31 ~ Theo
 
-### 2018-08-01 ~ Theo
+* Cleanup
+* Enhance read me files
+* link to md help
+
+
+### 2019-11-21 ~ Theo
+
+omoh v 0.01.01
+
+* R: Double quotes everywhere
+* C: Add version meta tag
+* C: Update readme
+
+### 2019-01-06 ~ Theo
 
 * First commit
 
+
 ***
 
-# <center title="hello!" ><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a></center>
+# <center title="hello! go tpo top" ><a href=javascript:window.scrollTo(0,0); > ❦ </a></center>
+
