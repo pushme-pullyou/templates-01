@@ -22,6 +22,22 @@ tips
 * https://github.com/bryanbraun/poor-mans-styleguide
 * https://www.poormansstyleguide.com/
 
+tests
+
+	<sub>abc def 123</sub>
+
+<sub>abc def 123</sub>
+
+<abbr>AEC</abbr>
+
+The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.
+
+abc ABC <small>abc def 123</small> ABC abc 
+
+<a>thing</a>
+
+<img height=10 width=1000 style="border: 1px solid red" >
+
 ### Text
 
 	_italics_ *italics*
