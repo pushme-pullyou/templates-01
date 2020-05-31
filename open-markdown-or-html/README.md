@@ -1,8 +1,8 @@
 
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html "View file as a web page." ) </span>
 
-<div><input type=button onclick=window.location.href="https://github.com/pushme-pullyou/templates-01/tree/master/open-markdown-or-html"
-value="You are now in a GitHub web page view - Click this button to view this read me file as source code" ></div>
+<input type=button onclick=window.location.href="https://github.com/pushme-pullyou/templates-01/tree/master/open-markdown-or-html"
+value="You are now in a GitHub web page view - Click this button to view this read me file as source code" >
 
 
 # [open-markdown-or-html Read Me]( ./readme.html )
