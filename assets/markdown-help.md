@@ -24,6 +24,10 @@ tips
 
 tests
 
+[//]: # (This syntax works like a comment, and won't appear in any output.)
+[//]: # (It’s a little bizarre, but it works with MacDown and Pandoc.)
+
+
 	<sub>abc def 123</sub>
 
 <sub>abc def 123</sub>
