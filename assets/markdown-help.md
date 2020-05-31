@@ -15,6 +15,13 @@ Interesting things you can do with Markdown.
 * https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
 * https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf
 
+tips
+
+* https://github.com/shaunlebron/github-markdown-hacks
+* https://www.webfx.com/tools/emoji-cheat-sheet/
+* https://github.com/bryanbraun/poor-mans-styleguide
+* https://www.poormansstyleguide.com/
+
 ### Text
 
 	_italics_ *italics*
@@ -36,6 +43,14 @@ _italics_ *italics*
 ```
 ~~Strike through~~
 
+
+### Keyboard
+
+	Press <kbd>W</kbd> to go up, and <kbd>A</kbd> to go down.
+	If you can find the <kbd>ESC</kbd>, pressing that will fire missiles 🚀
+
+Press <kbd>W</kbd> to go up, and <kbd>A</kbd> to go down.
+If you can find the <kbd>ESC</kbd>, pressing that will fire missiles 🚀
 ### Horizontal rules
 
 ```
@@ -136,6 +151,13 @@ text `text` text
 > quote
 > quote
 
+### Audio
+
+<audio controls="">
+	<source src="https://simpl.info/audio/audio/audio.ogv" type="audio/ogg">
+	<source src="https://simpl.info/audio/audio/audio.mp3" type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
 
 ### Images
 
