@@ -28,10 +28,18 @@ tests
 
 <sub>abc def 123</sub>
 
+	<abbr>AEC</abbr>
+
+	The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.
+
 <abbr>AEC</abbr>
 
 The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.
 
+Small: 
+
+	abc ABC <small>abc def 123</small> ABC abc 
+	
 abc ABC <small>abc def 123</small> ABC abc 
 
 <a>thing</a>
