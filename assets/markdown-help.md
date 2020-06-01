@@ -24,11 +24,22 @@ tips
 
 tests
 
+abc
+def
+ghi
+
+:bowtie:
+
+YAML here
+
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 [//]: # (It’s a little bizarre, but it works with MacDown and Pandoc.)
 
 [//]: # ( <iframe src=https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html width=100% height=100% >Iframes are not viewable in GitHub source code views</iframe> )
 
+http://alvinalexander.com/technology/markdown-comments-syntax-not-in-generated-output/
+
+***
 
 	<sub>abc def 123</sub>
 

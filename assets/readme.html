@@ -65,7 +65,7 @@ summary { cursor: pointer; font-size: 2.5ch; font-weight: bold; outline: none; }
 
 		const xhr = new XMLHttpRequest();
 		xhr.open( "get", url, true );
-		xhr.onload = () => divContent.innerHTML = new showdown.Converter().makeHtml( xhr.responseText );
+		xhr.onload = () => divContent.innerHTML = new showdown.Converter( { simpleLineBreaks: true, emoji: true, openLinksInNewWindow: true }).makeHtml( xhr.responseText );
 		xhr.send( null );
 
 	}
