@@ -32,10 +32,18 @@ ghi
 
 YAML here
 
+www.google.com.
+example.com
+
+Mentions
+
+@theo-armour
+
+YAML
+
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 [//]: # (It’s a little bizarre, but it works with MacDown and Pandoc.)
 
-[//]: # ( <iframe src=https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html width=100% height=100% >Iframes are not viewable in GitHub source code views</iframe> )
 
 http://alvinalexander.com/technology/markdown-comments-syntax-not-in-generated-output/
 
@@ -62,6 +70,14 @@ abc ABC <small>abc def 123</small> ABC abc
 <a>thing</a>
 
 <img height=10 width=1000 style="border: 1px solid red" >
+
+
+iframe test
+
+<!--@@@
+<iframe src=https://pushme-pullyou.github.io/templates-01/open-markdown-or-html/readme.html width=100% height=100% >Iframes are not viewable in GitHub source code views</iframe>
+@@@-->
+
 
 ### Text
 
