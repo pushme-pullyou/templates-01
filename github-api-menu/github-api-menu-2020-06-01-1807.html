@@ -188,7 +188,8 @@ function onLoad( json ) {
     
 	console.log( "paths", paths );
 
-	strings = paths.map( path => path.slice( 0, path.lastIndexOf( "/" ) ) );
+	strings = paths.filter( path => path.includes( "/" ) )
+	.map( path => path.slice( 0, path.lastIndexOf( "/" ) ) );
 
 	const pathsUnique = Array.from( new Set(strings) );
 
